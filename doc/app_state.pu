@@ -1,0 +1,28 @@
+@startuml
+'this diagram show how an application behaves
+
+Initialize : Values from Requirer/Provider are according
+Initialize : to default/startup in the xml.
+Initialize : If default/startup not specified then it shall
+Initialize : be zero. For enums the first member.
+Initialize : Not allowed to fuzz the default/startup values.
+
+Execute : App read/write to Port.
+Execute : App expect to the read values to NOT change.
+Execute : App write to Port.
+
+UpdateIO : The fun begins.
+UpdateIO : Fuzz fuzz the data.
+UpdateIO : Follow the ranges from the xml.
+UpdateIO : The range of an enum is [min, max].
+
+[*] --> Initialize
+
+Initialize --> UpdateIO
+UpdateIO --> Execute
+Execute --> UpdateIO
+Execute --> Terminate : Fuzzed nr of executes reached
+
+Terminate --> [*]
+
+@enduml
