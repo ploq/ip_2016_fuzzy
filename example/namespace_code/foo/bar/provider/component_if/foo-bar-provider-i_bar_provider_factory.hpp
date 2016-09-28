@@ -1,7 +1,7 @@
-#ifndef FOO-BAR-REQUIRER-I_BAR_REQUIRER_FACTORY_HPP
-#define FOO-BAR-REQUIRER-I_BAR_REQUIRER_FACTORY_HPP
+#ifndef FOO_BAR_REQUIRER_I_BAR_PROVIDER_FACTORY_HPP
+#define FOO_BAR_REQUIRER_I_BAR_PROVIDER_FACTORY_HPP
 
-#include "foo-bar-requirer-i_bar_requirer.hpp"
+#include "foo-bar-provider-i_bar_provider.hpp"
 #include <string>
 
 namespace Foo {

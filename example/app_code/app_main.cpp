@@ -22,12 +22,12 @@ void APP_Name_Initialize() {
 
     comp_z = &Foo::Bar::Provider::Create_Instance("Z");
     comp_z->Init();
-    port_z = &Foo->Get_Port();
+    port_z = &comp_z->Get_Port();
 }
 
 void APP_Name_Execute() {
     if (comp_x->Get_Port().Get_Foo().V0 > 2) {
-        comp_y->Get_Port().Get_Fum.V0 = 42;
+        comp_y->Get_Port().Get_Fum().V0 = 42;
     }
 
     port_z->Get_Foo().V1 = comp_x->Get_Port().Get_Foo_V1();
