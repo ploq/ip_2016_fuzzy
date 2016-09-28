@@ -5,7 +5,7 @@
 // it exist in the system as a mapping between the defined primitives in XML
 // and the concrete types.
 
-typedef float FloatT
-typedef double RealT
+typedef float FloatT;
+typedef double RealT;
 
 #endif // REALS_HPP
