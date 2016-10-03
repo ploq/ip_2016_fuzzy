@@ -1,66 +1,0 @@
-
-namespace_code/foo/bar/requirer/component_if/foo-bar-requirer-i_bar_requirer.hpp,183
-#define FOO-FOO2,44
-namespace Foo 6,128
-namespace Bar Foo::Bar8,145
-namespace Requirer Foo::Bar::Requirer10,162
-class I_Bar_Requirer Foo::Bar::Requirer::I_Bar_Requirer12,184
-
-namespace_code/foo/bar/requirer/component_if/foo-bar-requirer-i_bar_requirer_factory.hpp,119
-#define FOO-FOO2,52
-namespace Foo 7,171
-namespace Bar Foo::Bar9,188
-namespace Requirer Foo::Bar::Requirer11,205
-
-namespace_code/foo/bar/requirer/port/foo-bar-requirer-i_bar_requirer.hpp,138
-namespace Foo 3,59
-namespace Bar Foo::Bar5,76
-namespace Requirer Foo::Bar::Requirer7,93
-class I_Bar Foo::Bar::Requirer::I_Bar9,115
-
-namespace_code/foo/bar/provider/component_if/foo-bar-provider-i_bar_provider_factory.hpp,119
-#define FOO-FOO2,52
-namespace Foo 7,171
-namespace Bar Foo::Bar9,188
-namespace Provider Foo::Bar::Provider11,205
-
-namespace_code/foo/bar/provider/component_if/foo-bar-provider-i_bar_provider.hpp,183
-#define FOO-FOO2,44
-namespace Foo 6,128
-namespace Bar Foo::Bar8,145
-namespace Provider Foo::Bar::Provider10,162
-class I_Bar_Provider Foo::Bar::Provider::I_Bar_Provider12,184
-
-namespace_code/foo/bar/provider/port/foo-bar-provider-i_bar_provider.hpp,138
-namespace Foo 3,59
-namespace Bar Foo::Bar5,76
-namespace Provider Foo::Bar::Provider7,93
-class I_Bar Foo::Bar::Provider::I_Bar9,115
-
-app_code/app_main.cpp,324
-Foo::Bar::Requirer::I_Bar_Requirer* comp_x;::comp_x8,235
-Foo::Bar::Requirer::I_Bar_Requirer* comp_y;::comp_y9,279
-Foo::Bar::Provider::I_Bar_Provider* comp_z;::comp_z10,323
-Foo::Bar::Provider::I_Bar* port_z;::port_z12,368
-void APP_Name_Initialize(16,414
-void APP_Name_Execute(28,707
-void APP_Name_Terminate(36,894
-
-app_code/test_double.cpp,237
-TestDouble::I_TestDouble* test_double_inst ::test_double_inst4,40
-namespace TestDouble 7,97
-Adapter::Adapter(TestDouble::Adapter::Adapter8,120
-Adapter::~Adapter(12,192
-void APP_Name_Execute(19,275
-void APP_Name_Initialize(23,346
-
-app_code/app_main.hpp,26
-#define APP_MAIN_HPP2,21
-
-app_code/test_double.hpp,129
-#define test_double_hpp2,24
-namespace TestDouble 7,88
-class I_TestDouble TestDouble::I_TestDouble8,111
-class Adapter 16,368
-
-app_code/test_double_global.cpp,0
