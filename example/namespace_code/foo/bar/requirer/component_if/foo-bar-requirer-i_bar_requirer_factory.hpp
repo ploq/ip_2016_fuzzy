@@ -1,5 +1,5 @@
-#ifndef FOO-BAR-REQUIRER-I_BAR_REQUIRER_FACTORY_HPP
-#define FOO-BAR-REQUIRER-I_BAR_REQUIRER_FACTORY_HPP
+#ifndef FOO_BAR_REQUIRER_I_BAR_REQUIRER_FACTORY_HPP
+#define FOO_BAR_REQUIRER_I_BAR_REQUIRER_FACTORY_HPP
 
 #include "foo-bar-requirer-i_bar_requirer.hpp"
 #include <string>
@@ -18,4 +18,4 @@ I_Bar_Requirer& Create_Instance(const std::string& name);
 
 } // NS: Foo
 
-#endif // FOO-BAR-REQUIRER-I_BAR_REQUIRER_FACTORY_HPP
+#endif // FOO_BAR_REQUIRER_I_BAR_REQUIRER_FACTORY_HPP

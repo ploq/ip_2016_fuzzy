@@ -1,5 +1,5 @@
-#ifndef FOO-BAR-REQUIRER-I_BAR_REQUIRER_HPP
-#define FOO-BAR-REQUIRER-I_BAR_REQUIRER_HPP
+#ifndef FOO_BAR_REQUIRER_I_BAR_REQUIRER_HPP
+#define FOO_BAR_REQUIRER_I_BAR_REQUIRER_HPP
 
 #include "foo-bar-requirer-i_bar.hpp"
 
@@ -28,4 +28,4 @@ private:
 
 } // NS: Foo
 
-#endif // FOO-BAR-REQUIRER-I_BAR_REQUIRER_HPP
+#endif // FOO_BAR_REQUIRER_I_BAR_REQUIRER_HPP
