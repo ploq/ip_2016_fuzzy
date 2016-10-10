@@ -34,7 +34,7 @@ namespace Foo {
 
       class I_Bar_Requirer_Impl : public I_Bar_Requirer {
       public:
-	~I_Bar_Requirer_Impl() {}
+	~I_Bar_Requirer_Impl() {delete port;}
 	I_Bar_Requirer_Impl() {port=0;}
 	void Init() {port = new I_Bar_Impl();}
 	Foo::Bar::Requirer::I_Bar& Get_Port() {return *port;}
