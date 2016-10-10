@@ -20,8 +20,8 @@ namespace Foo {
 	  foo.V5 = V5;
 	  foo.V6 = V6;
 	}
-	const Foo::Bar::FumT& Get_Fum () {return fum;}
-	int64_t Gem_Fum_V0() {return fum.V0;}
+	const Foo::Bar::FumT& Get_Fum () const {return fum;}
+	int64_t Get_Fum_V0() const {return fum.V0;}
       private:
 	Foo::Bar::FumT fum;
 	Foo::Bar::FunT foo;
@@ -29,17 +29,17 @@ namespace Foo {
 
       class I_Bar_Provider_Impl : public I_Bar_Provider {
       public:
-	~I_Bar_Provider() {}
-	I_Bar_Provider() {port=0;}
-	void Init() {port = 0;}
-	Foo::Bar::Provider::I_Bar& Get_Port() {return port;}
+	~I_Bar_Provider_Impl() {}
+	I_Bar_Provider_Impl() {port=0;}
+	void Init() {port = new I_Bar_Impl();}
+	Foo::Bar::Provider::I_Bar& Get_Port() {return *port;}
       private:
-	I_Bar port;
+	I_Bar *port;
       };
 
       I_Bar_Provider& Create_Instance(const std::string& name) {
-	return new I_Bar_Provider;
-      };
+	return *(new I_Bar_Provider_Impl);
+      }
     }
   }
 }
