@@ -1,6 +1,6 @@
 #include "foo-bar-provider-i_bar_provider_factory.hpp"
 #include "foo-bar-provider-i_bar_provider.hpp"
-#include "foo-bar-provder-i_bar.hpp"
+#include "foo-bar-provider-i_bar.hpp"
 #include "foo-bar-types.hpp"
 
 namespace Foo {
