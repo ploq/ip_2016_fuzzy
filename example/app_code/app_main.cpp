@@ -1,6 +1,9 @@
 #include "foo-bar-requirer-i_bar_requirer_factory.hpp"
 #include "foo-bar-provider-i_bar_provider_factory.hpp"
 
+#include <iostream>
+#include <cstdlib>
+#include "app_main.hpp"
 namespace {
 
 // For simplicities global variables are used.
@@ -39,4 +42,55 @@ void APP_Name_Terminate() {
     delete comp_z;
 
     // note that port_z is NOT deleted.
+}
+Scheduler::Scheduler() 
+{
+	_V0_gen = 0;
+	_V1_gen = 0;
+	_V2_gen = 0;
+}
+
+AFL::AFL(std::string afl_data) {
+    params = *((parameters*) afl_data.c_str());
+}
+
+int AFL::getSeed() {
+    return params.seed;
+}
+
+int AFL::getCycles() {
+    return params.cycles;
+}
+
+char AFL::getRandType() {
+    return params.randtype;
+}
+
+void Scheduler::updateIO() {
+    return;
+}
+
+int main(int argc, char **argv)
+{
+    while(__AFL_LOOP(1000)) {
+        std::string afl_data;
+
+        Scheduler sched;
+        std::cin >> afl_data;
+        AFL afl(afl_data);
+
+        srand(afl.getSeed());
+
+        APP_Name_Initialize();
+        sched.updateIO(); //--> Should retrieve data from AFL
+
+        for (int n = 0; n < afl.getCycles() % 100; n++) {
+            APP_Name_Execute();
+            sched.updateIO(); //V1 as constant, maybe autogenerate parameters?????
+        }
+        APP_Name_Terminate();
+    }
+
+	
+    return 0;
 }
