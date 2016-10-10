@@ -10,4 +10,4 @@ include_directories(
 
 file(GLOB SRC *.cpp)
 add_executable(app "${SRC}")
-link_libraries(app libfoo)
+target_link_libraries(app foo)

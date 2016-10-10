@@ -8,8 +8,14 @@ namespace Foo {
   namespace Bar {
 
     namespace Provider {
+      I_Bar::I_Bar() {}
+      I_Bar::~I_Bar() {}
+      I_Bar_Provider::I_Bar_Provider() {}
+      I_Bar_Provider::~I_Bar_Provider() {}
       class I_Bar_Impl : public I_Bar {
       public:
+	I_Bar_Impl() {}
+	~I_Bar_Impl() {}
 	Foo::Bar::FunT& Get_Foo() {return foo;}
 	void Put_Fun(const int64_t V0, const Foo::Bar::MyIntT V1, const Foo::Bar::MyIntT V2, const Foo::MyHeightT V3, const Foo::BundleT& V4, const Foo::SimpleT::Enum V5, const Foo::WithHolesT::Enum V6) {
 	  foo.V0 = V0;
