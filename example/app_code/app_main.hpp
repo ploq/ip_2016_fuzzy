@@ -8,6 +8,7 @@ void APP_Name_Execute();
 // Optional
 void APP_Name_Terminate();
 
+/*
 class Scheduler {
     int _V0_gen, _V1_gen, _V2_gen;
 public:
@@ -17,8 +18,8 @@ public:
 };
 
 struct parameters {
-  int cycles;
-  int seed;
+  unsigned int cycles;
+  unsigned int seed;
   char randtype;
 };
 
@@ -28,9 +29,9 @@ private:
 
 public:
     AFL(std::string afl_data);
-    int getCycles(void);
-    int getSeed(void);
+    unsigned int getCycles(void);
+    unsigned int getSeed(void);
     char getRandType(void);
-};
+};*/
 
 #endif // APP_MAIN_HPP
