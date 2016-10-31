@@ -21,3 +21,10 @@ public:
 private:
    std::map<Key, Value> m_ports;
 };
+
+template<typename Value, typename Key>
+Value& GetPort(Key key)
+{
+   static PortHandler<Value, Key> portHandler;
+   return *((Key*)portHandler.getPort(key));
+}
