@@ -35,7 +35,7 @@ namespace Foo {
 
       class I_Bar_Provider_Impl : public I_Bar_Provider {
       public:
-	~I_Bar_Provider_Impl() {}
+	~I_Bar_Provider_Impl() {delete port;}
 	I_Bar_Provider_Impl() {port=0;}
 	void Init() {port = new I_Bar_Impl();}
 	Foo::Bar::Provider::I_Bar& Get_Port() {return *port;}
