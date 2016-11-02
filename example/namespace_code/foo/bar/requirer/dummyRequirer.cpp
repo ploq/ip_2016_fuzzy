@@ -3,6 +3,8 @@
 #include "foo-bar-requirer-i_bar.hpp"
 #include "foo-bar-types.hpp"
 
+#include "PortHandler.hpp"
+
 namespace Foo {
 
   namespace Bar {
@@ -12,10 +14,10 @@ namespace Foo {
       I_Bar::~I_Bar() {}
       I_Bar_Requirer::I_Bar_Requirer() {}
       I_Bar_Requirer::~I_Bar_Requirer() {}
-      class I_Bar_Impl : public I_Bar {
+      class Bar_Impl : public I_Bar {
       public:
-	I_Bar_Impl() {}
-	~I_Bar_Impl() {}
+	Bar_Impl() {}
+	~Bar_Impl() {}
 	const Foo::Bar::FunT& Get_Foo() const {return foo;}
 	int64_t Get_Foo_V0() const {return foo.V0;}
 	Foo::Bar::MyIntT Get_Foo_V1() const {return foo.V1;}
@@ -32,18 +34,19 @@ namespace Foo {
 	Foo::Bar::FunT foo;
       };
 
-      class I_Bar_Requirer_Impl : public I_Bar_Requirer {
+      class Bar_Requirer_Impl : public I_Bar_Requirer {
       public:
-	~I_Bar_Requirer_Impl() {delete port;}
-	I_Bar_Requirer_Impl() {port=0;}
-	void Init() {port = new I_Bar_Impl();}
+	~Bar_Requirer_Impl() {}
+	  Bar_Requirer_Impl() {}
+	Bar_Requirer_Impl(I_Bar* p) {port=p;}
+	void Init() {}
 	Foo::Bar::Requirer::I_Bar& Get_Port() {return *port;}
       private:
 	I_Bar *port;
       };
 
       I_Bar_Requirer& Create_Instance(const std::string& name) {
-	return *(new I_Bar_Requirer_Impl);
+	  return *(new Bar_Requirer_Impl((I_Bar*)GetPort<Bar_Impl, std::string>(name)));
       }
     }
   }
