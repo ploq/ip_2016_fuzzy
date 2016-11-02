@@ -9,13 +9,15 @@ public:
 
    void* getPort(Key key)
    {
-      if (m_ports.find(key) != m_ports.end())
+       typename std::map<Key, Value>::iterator it = m_ports.find(key);
+      if (it != m_ports.end())
       {
-	 return m_ports[key];
-      } else
+	  return (void*)&(m_ports[key]);
+      }
+      else
       {
 	 m_ports[key] = Value();
-	 return m_ports[key];
+	 return (void*)&(m_ports[key]);
       }
    }
 private:
@@ -26,5 +28,5 @@ template<typename Value, typename Key>
 Value& GetPort(Key key)
 {
    static PortHandler<Value, Key> portHandler;
-   return *((Key*)portHandler.getPort(key));
+   return *((Value*)portHandler.getPort(key));
 }
