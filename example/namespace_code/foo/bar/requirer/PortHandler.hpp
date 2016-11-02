@@ -1,4 +1,5 @@
 #include <map>
+#include "PortStorage.hpp"
 
 template<typename Value, typename Key>
 class PortHandler
@@ -22,8 +23,18 @@ public:
 	    }
 	    else
 	    {
-		m_ports[key] = new Value();
+		Value* val = new Value();
+		m_ports[key] = val;
+		PortStorage::AddRegeneratable(new Regeneratable_Impl<Value*>(val));
 		return (void*)m_ports[key];
+	    }
+	}
+
+    void RegeneratePorts()
+	{
+	    for (typename std::map<Key, Value*>::iterator it = m_ports.begin(); it != m_ports.end(); ++it)
+	    {
+		it->second->Regenerate();
 	    }
 	}
 private:

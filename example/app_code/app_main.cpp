@@ -13,6 +13,7 @@
 #include <sys/syscall.h>
 #include <ctime>
 #include "app_main.hpp"
+#include "PortStorage.hpp"
 namespace {
 
 // For simplicities global variables are used.
@@ -52,87 +53,39 @@ void APP_Name_Terminate() {
 
     // note that port_z is NOT deleted.
 }
-/*Scheduler::Scheduler() 
+
+void updateIO()
 {
-	_V0_gen = 0;
-	_V1_gen = 0;
-	_V2_gen = 0;
+    PortStorage::Regenerate();
+    //((Foo::Bar::Requirer::Bar_Impl*)(comp_x->Get_Port())).Regenerate();
+    //((Foo::Bar::Requirer::Bar_Impl*)(comp_y->Get_Port())).Regenerate();
+    //((Foo::Bar::Provider::Bar_Impl*)(comp_z->Get_Port())).Regenerate();
 }
 
-AFL::AFL(std::string afl_data) {
-    /*int d;
-    syscall(SYS_getrandom, (void*)&d, sizeof(d), 0);//rand() % (afl_data.length() - sizeof(parameters) - 1);
-    if (afl_data.length() < sizeof(parameters) - 1)
-    {
-        d = 0;
-    }
-    else
-    {
-        d = (d % (afl_data.length() - sizeof(parameters) - 1)) + 1;
-    }
-    params = *((parameters*) afl_data.c_str() );//+ d);
-}
-
-unsigned int AFL::getSeed() {
-    return params.seed;
-}
-
-unsigned int AFL::getCycles() {
-    return params.cycles;
-}
-
-char AFL::getRandType() {
-    return params.randtype;
-}
-
-void Scheduler::updateIO() {
-    Foo::Bar::FumT& fum = comp_y->Get_Port().Get_Fum();
-    fum.V0 = rand() % INT32_MAX;
-
-    Foo::Bar::FunT& fun = comp_z->Get_Port().Get_Foo();
-    fun.V0 = rand() % INT32_MAX;
-    fun.V1 = rand() % 10 + -1;
-    fun.V2 = 5;
-    fun.V3 = rand() % 50000;
-    fun.V4.P0 = rand();
-    fun.V4.P1 = rand() % 50000;
-    //fun.V5 = 0;
-    //fun.V6 = 10;
-
-    return;
-}*/
 
 int main(int argc, char **argv)
-{
-    //parameters oldparams;
+{        
+    std::string afl_data;
+    std::ofstream output_file("output.txt", std::ios_base::app);
+    Scheduler sched;
+    std::cin >> afl_data;
+    if (afl_data.size() < sizeof(parameters)) return 0;
+    AFL afl(afl_data);
 
-    //while(__AFL_LOOP(1000)) {
-        
-        std::string afl_data;
-        std::ofstream output_file("output.txt", std::ios_base::app);
-        Scheduler sched;
-        std::cin >> afl_data;
-        if (afl_data.size() < sizeof(parameters)) return 0;
-        AFL afl(afl_data);
 
-        /*if (afl.getSeed() == 0 || afl.getCycles() == 0)
-        {
-            continue;
-        }*/
+    srand(afl.getSeed());
 
-        srand(afl.getSeed());
+    APP_Name_Initialize();
+    PortStorage::Regenerate();//sched.updateIO(1,2,3); //--> Should retrieve data from AFL
 
-        APP_Name_Initialize();
-        sched.updateIO(1,2,3); //--> Should retrieve data from AFL
+    for (int n = 0; n < 10000; n++) {
+	APP_Name_Execute();
+	PortStorage::Regenerate();//sched.updateIO(1,2,3); //V1 as constant, maybe autogenerate parameters?????
+    }
+    APP_Name_Terminate();
+    output_file << afl.getCycles() << " " << afl.getSeed() << std::endl;
+    output_file.close();
 
-        for (int n = 0; n < 10000; n++) {
-            APP_Name_Execute();
-            sched.updateIO(1,2,3); //V1 as constant, maybe autogenerate parameters?????
-        }
-        APP_Name_Terminate();
-        output_file << afl.getCycles() << " " << afl.getSeed() << std::endl;
-        output_file.close();
-    //}
 
 	
     return 0;
