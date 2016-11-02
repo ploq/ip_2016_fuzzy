@@ -18,17 +18,13 @@ namespace Foo {
 	Bar_Impl() {}
 	~Bar_Impl() {}
 	Foo::Bar::FunT& Get_Foo() {return foo;}
-	void Put_Fun(const int64_t V0, const Foo::Bar::MyIntT V1, const Foo::Bar::MyIntT V2, const Foo::MyHeightT V3, const Foo::BundleT& V4, const Foo::SimpleT::Enum V5, const Foo::WithHolesT::Enum V6) {
-	  foo.V0 = V0;
-	  foo.V1 = V1;
-	  foo.V2 = V2;
-	  foo.V3 = V3;
-	  foo.V4 = V4;
-	  foo.V5 = V5;
-	  foo.V6 = V6;
-	}
+	void Put_Fun(const int64_t V0, const Foo::Bar::MyIntT V1, const Foo::Bar::MyIntT V2, const Foo::MyHeightT V3, const Foo::BundleT& V4, const Foo::SimpleT::Enum V5, const Foo::WithHolesT::Enum V6) {}
 	const Foo::Bar::FumT& Get_Fum () const {return fum;}
 	int64_t Get_Fum_V0() const {return fum.V0;}
+
+	  void Regenerate()
+	      {
+	      }
       private:
 	Foo::Bar::FumT fum;
 	Foo::Bar::FunT foo;

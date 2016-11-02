@@ -9,5 +9,5 @@ include_directories(
     )
 
 
-file(GLOB SRC bar/provider/*.cpp bar/requirer/*.cpp)
+file(GLOB SRC PortHandler.hpp bar/provider/*.cpp bar/requirer/*.cpp)
 add_library(foo "${SRC}")

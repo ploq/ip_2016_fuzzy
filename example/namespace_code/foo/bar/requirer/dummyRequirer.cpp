@@ -28,7 +28,12 @@ namespace Foo {
 	Foo::WithHolesT::Enum Get_Foo_V6() const {return foo.V6;}
 
 	Foo::Bar::FumT& Get_Fum () {return fum;}
-	void Put_Fum(const int64_t V0) {foo.V0=V0;}
+	void Put_Fum(const int64_t V0) {}
+
+	  void Regenerate()
+	      {
+		  
+	      }
       private:
 	Foo::Bar::FumT fum;
 	Foo::Bar::FunT foo;
