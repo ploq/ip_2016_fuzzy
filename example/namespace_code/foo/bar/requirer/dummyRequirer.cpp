@@ -5,6 +5,8 @@
 
 #include "PortHandler.hpp"
 
+//Allting genereras i dextool
+
 namespace Foo {
 
     namespace Bar {
