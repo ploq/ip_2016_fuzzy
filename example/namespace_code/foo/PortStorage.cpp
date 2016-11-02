@@ -16,3 +16,11 @@ void PortStorage::Regenerate()
 	regeneratables[i]->Regenerate();
     }
 }
+
+void PortStorage::CleanUp()
+{
+    for (unsigned int i = 0; i < regeneratables.size(); ++i)
+    {
+	delete regeneratables[i];
+    }
+}

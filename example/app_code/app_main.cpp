@@ -86,7 +86,7 @@ int main(int argc, char **argv)
     output_file << afl.getCycles() << " " << afl.getSeed() << std::endl;
     output_file.close();
 
-
+    PortStorage::CleanUp();
 	
     return 0;
 }

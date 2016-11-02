@@ -30,10 +30,11 @@ private:
     P p;
 };
 
-namespace PortStorage
+namespace PortStorage //TODO: Put in a class, with destructors and such
 {
     void AddRegeneratable(I_Regeneratable* regen);
     void Regenerate();
+    void CleanUp(); 
 }
 
 #endif
