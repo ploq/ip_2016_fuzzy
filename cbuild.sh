@@ -6,5 +6,5 @@ rm -rf build
 mkdir build
 cd build
 CXX=/home/pc022838/afl-2.35b/afl-clang-fast++
-cmake -D CMAKE_CXX_COMPILER=/home/inhuman/afl-2.33b/afl-clang-fast++ -std=gnu++03 ../example/ -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
+cmake -D CMAKE_CXX_COMPILER=/home/inhuman/afl-2.33b/afl-clang-fast++ -std=c++11 ../example/ -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
 make
