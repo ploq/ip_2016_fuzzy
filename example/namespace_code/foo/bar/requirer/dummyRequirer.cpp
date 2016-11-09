@@ -2,7 +2,8 @@
 #include "foo-bar-requirer-i_bar_requirer.hpp"
 #include "foo-bar-requirer-i_bar.hpp"
 #include "foo-bar-types.hpp"
-
+#include "mt1337.hpp"
+#include "afllib.hpp"
 #include "PortHandler.hpp"
 
 //Allting genereras i dextool
@@ -18,7 +19,10 @@ namespace Foo {
 	    I_Bar_Requirer::~I_Bar_Requirer() {}
 	    class Bar_Impl : public I_Bar {
 	    public:
-		Bar_Impl() {}
+		Bar_Impl() 
+		    {
+			randomGenerator = AFL::getRandomGenerator();
+		    }
 		~Bar_Impl() {}
 		const Foo::Bar::FunT& Get_Foo() const {return foo;}
 		int64_t Get_Foo_V0() const {return foo.V0;}
@@ -33,11 +37,22 @@ namespace Foo {
 		void Put_Fum(const int64_t V0) {}
 
 		void Regenerate()
-		    {
+		    { 
+			fum.V0 = randomGenerator.extractNumber();
+			foo.V0 = randomGenerator.extractNumber();
+			foo.V1 = randomGenerator.extractNumber();
+			foo.V2 = randomGenerator.extractNumber();
+			foo.V3 = randomGenerator.extractNumber();
+			foo.V4.P0 = randomGenerator.extractNumber();
+			foo.V4.P1 = randomGenerator.extractNumber();
+			foo.V5 = static_cast<Foo::SimpleT::Enum>(randomGenerator.extractNumber() % 3);
+			foo.V6 = static_cast<Foo::WithHolesT::Enum>((randomGenerator.extractNumber() % 10) + 1);
 		    }
 	    private:
 		Foo::Bar::FumT fum;
 		Foo::Bar::FunT foo;
+		
+		MT1337 randomGenerator;
 	    };
 
 	    class Bar_Requirer_Impl : public I_Bar_Requirer {

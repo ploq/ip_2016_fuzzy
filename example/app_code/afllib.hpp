@@ -1,6 +1,8 @@
 #include <string>
 #include <stdint.h>
 
+#include "mt1337.hpp"
+
 struct parameters {
   int cycles;
   int seed;
@@ -9,15 +11,19 @@ struct parameters {
 
 class AFL {
 private:
-    struct parameters params;
+    static parameters params;
+    static int progress;
 
 public:
-    AFL(std::string afl_data);
-    int getCycles(void);
-    int getSeed(void);
-    char getRandType(void);
+    AFL();
+    static void init(std::string afl_data);
+    static int getCycles(void);
+    static int getSeed(void);
+    static char getRandType(void);
+    
+    static MT1337 getRandomGenerator();
 
-    static void Regenerate(int64_t& value);
+    /*static void Regenerate(int64_t& value);
     static void Regenerate(int32_t& value);
     static void Regenerate(int16_t& value);
     static void Regenerate(int8_t& value);
@@ -37,5 +43,5 @@ public:
     static void Regenerate(uint16_t& value, uint16_t min, uint16_t max);
     static void Regenerate(uint8_t& value, uint8_t min, uint8_t max);
     static void Regenerate(float& value, float min, float max);
-    static void Regenerate(double& value, double min, double max);
+    static void Regenerate(double& value, double min, double max);*/
 };

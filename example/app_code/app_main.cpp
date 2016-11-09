@@ -70,20 +70,20 @@ int main(int argc, char **argv)
     Scheduler sched;
     std::cin >> afl_data;
     if (afl_data.size() < sizeof(parameters)) return 0;
-    AFL afl(afl_data);
+    
+    AFL::init(afl_data);
 
 
-    srand(afl.getSeed());
+    srand(AFL::getSeed());
 
     APP_Name_Initialize();
-    PortStorage::Regenerate();//sched.updateIO(1,2,3); //--> Should retrieve data from AFL
 
     for (int n = 0; n < 10000; n++) {
-	APP_Name_Execute();
 	PortStorage::Regenerate();//sched.updateIO(1,2,3); //V1 as constant, maybe autogenerate parameters?????
+	APP_Name_Execute();
     }
     APP_Name_Terminate();
-    output_file << afl.getCycles() << " " << afl.getSeed() << std::endl;
+    output_file << AFL::getCycles() << " " << AFL::getSeed() << std::endl;
     output_file.close();
 
     PortStorage::CleanUp();
