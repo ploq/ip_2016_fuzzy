@@ -1,0 +1,3 @@
+[submodule "dextool"]
+	path = dextool
+	url = git@github.com:ploq/dextool.git
