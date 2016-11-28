@@ -1,0 +1,42 @@
+[
+{
+  "directory": "/home/pc022838/ip_2016_fuzzy",
+  "command": "/home/pc022838/afl-2.35b/afl-clang-fast++    -I/home/pc022838/ip_2016_fuzzy/flat    -o CMakeFiles/app.dir/PortStorage.cpp.o -c /home/pc022838/ip_2016_fuzzy/flat/PortStorage.cpp",
+  "file": "/home/pc022838/ip_2016_fuzzy/flat/PortStorage.cpp"
+},
+{
+  "directory": "/home/pc022838/ip_2016_fuzzy",
+  "command": "/home/pc022838/afl-2.35b/afl-clang-fast++    -I/home/pc022838/ip_2016_fuzzy/flat    -o CMakeFiles/app.dir/sha256.cpp.o -c /home/pc022838/ip_2016_fuzzy/flat/sha256.cpp",
+  "file": "/home/pc022838/ip_2016_fuzzy/flat/sha256.cpp"
+},
+{
+  "directory": "/home/pc022838/ip_2016_fuzzy",
+  "command": "/home/pc022838/afl-2.35b/afl-clang-fast++    -I/home/pc022838/ip_2016_fuzzy/flat    -o CMakeFiles/app.dir/scheduler.cpp.o -c /home/pc022838/ip_2016_fuzzy/flat/scheduler.cpp",
+  "file": "/home/pc022838/ip_2016_fuzzy/flat/scheduler.cpp"
+},
+{
+  "directory": "/home/pc022838/ip_2016_fuzzy",
+  "command": "/home/pc022838/afl-2.35b/afl-clang-fast++    -I/home/pc022838/ip_2016_fuzzy/flat    -o CMakeFiles/app.dir/mt1337.cpp.o -c /home/pc022838/ip_2016_fuzzy/flat/mt1337.cpp",
+  "file": "/home/pc022838/ip_2016_fuzzy/flat/mt1337.cpp"
+},
+{
+  "directory": "/home/pc022838/ip_2016_fuzzy",
+  "command": "/home/pc022838/afl-2.35b/afl-clang-fast++    -I/home/pc022838/ip_2016_fuzzy/flat    -o CMakeFiles/app.dir/app_main.cpp.o -c /home/pc022838/ip_2016_fuzzy/flat/app_main.cpp",
+  "file": "/home/pc022838/ip_2016_fuzzy/flat/app_main.cpp"
+},
+{
+  "directory": "/home/pc022838/ip_2016_fuzzy",
+  "command": "/home/pc022838/afl-2.35b/afl-clang-fast++    -I/home/pc022838/ip_2016_fuzzy/flat    -o CMakeFiles/app.dir/afllib.cpp.o -c /home/pc022838/ip_2016_fuzzy/flat/afllib.cpp",
+  "file": "/home/pc022838/ip_2016_fuzzy/flat/afllib.cpp"
+},
+{
+  "directory": "/home/pc022838/ip_2016_fuzzy",
+  "command": "/home/pc022838/afl-2.35b/afl-clang-fast++    -I/home/pc022838/ip_2016_fuzzy/flat    -o CMakeFiles/app.dir/dummyProvider.cpp.o -c /home/pc022838/ip_2016_fuzzy/flat/dummyProvider.cpp",
+  "file": "/home/pc022838/ip_2016_fuzzy/flat/dummyProvider.cpp"
+},
+{
+  "directory": "/home/pc022838/ip_2016_fuzzy",
+  "command": "/home/pc022838/afl-2.35b/afl-clang-fast++    -I/home/pc022838/ip_2016_fuzzy/flat    -o CMakeFiles/app.dir/dummyRequirer.cpp.o -c /home/pc022838/ip_2016_fuzzy/flat/dummyRequirer.cpp",
+  "file": "/home/pc022838/ip_2016_fuzzy/flat/dummyRequirer.cpp"
+}
+]
