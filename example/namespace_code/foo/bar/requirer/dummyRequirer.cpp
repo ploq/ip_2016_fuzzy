@@ -2,8 +2,7 @@
 #include "foo-bar-requirer-i_bar_requirer.hpp"
 #include "foo-bar-requirer-i_bar.hpp"
 #include "foo-bar-types.hpp"
-#include "mt1337.hpp"
-#include "afllib.hpp"
+#include "testingenvironment.hpp"
 #include "PortHandler.hpp"
 
 //Allting genereras i dextool
@@ -21,7 +20,7 @@ namespace Foo {
 	    public:
 		Bar_Impl() 
 		    {
-			randomGenerator = AFL::getRandomGenerator();
+			randomGenerator = &TestingEnvironment::createRandomGenerator();
 		    }
 		~Bar_Impl() {}
 		const Foo::Bar::FunT& Get_Foo() const {return foo;}
@@ -38,21 +37,21 @@ namespace Foo {
 
 		void Regenerate()
 		    { 
-			fum.V0 = randomGenerator.extractNumber();
-			foo.V0 = randomGenerator.extractNumber();
-			foo.V1 = randomGenerator.extractNumber();
-			foo.V2 = randomGenerator.extractNumber();
-			foo.V3 = randomGenerator.extractNumber();
-			foo.V4.P0 = randomGenerator.extractNumber();
-			foo.V4.P1 = randomGenerator.extractNumber();
-			foo.V5 = static_cast<Foo::SimpleT::Enum>(randomGenerator.extractNumber() % 3);
-			foo.V6 = static_cast<Foo::WithHolesT::Enum>((randomGenerator.extractNumber() % 10) + 1);
+			fum.V0 = randomGenerator->generate("Requirer fum V0");
+			foo.V0 = randomGenerator->generate("Requirer foo V0");
+			foo.V1 = randomGenerator->generate("Requirer foo V1") % 100000; //TODO: REMOVE
+			foo.V2 = randomGenerator->generate("Requirer foo V2") % 100000; //TODO: REMOVE
+			foo.V3 = randomGenerator->generate("Requirer foo V3");
+			foo.V4.P0 = randomGenerator->generate("Requirer foo V4 P0");
+			foo.V4.P1 = randomGenerator->generate("Requirer foo V4 P1");
+			foo.V5 = static_cast<Foo::SimpleT::Enum>(randomGenerator->generate("Requirer foo V5") % 3);
+			foo.V6 = static_cast<Foo::WithHolesT::Enum>((randomGenerator->generate("Requirer foo V6") % 10) + 1);
 		    }
 	    private:
 		Foo::Bar::FumT fum;
 		Foo::Bar::FunT foo;
 		
-		MT1337 randomGenerator;
+		RandomGenerator* randomGenerator;
 	    };
 
 	    class Bar_Requirer_Impl : public I_Bar_Requirer {

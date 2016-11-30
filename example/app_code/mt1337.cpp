@@ -1,6 +1,9 @@
 #include "mt1337.hpp"
+#include "logger.hpp"
+#include <sstream>
+#include <string>
 
-MT1337::MT1337(int seed) {
+MT1337::MT1337(int seed) : RandomGenerator("MT1337") {
 	index = 624;
 	mt[0] = seed;
 	
@@ -39,4 +42,33 @@ void MT1337::twistIt() {
 	}
 
 	index = 0;
+}
+
+int64_t MT1337::generate(std::string note)
+{
+    int64_t value = extractNumber();
+    Logger::log(name + ": " + note + ": " + std::to_string(value));
+    return value;
+}
+
+int64_t MT1337::generate(std::string note, int64_t min, int64_t max)
+{
+    //TODO: TEST THIS!!!
+    int64_t value = extractNumber();
+    uint64_t difference = max - min;
+    if (value > max || value < min)
+    {
+	value = min + (value % difference);
+    }
+    return value;
+}
+
+uint64_t MT1337::getSeed()
+{
+    return index;
+}
+
+void MT1337::nextSeed()
+{
+    twistIt();
 }

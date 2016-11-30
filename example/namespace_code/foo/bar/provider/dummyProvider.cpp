@@ -3,8 +3,7 @@
 #include "foo-bar-provider-i_bar.hpp"
 #include "foo-bar-types.hpp"
 #include "PortHandler.hpp"
-#include "mt1337.hpp"
-#include "afllib.hpp"
+#include "testingenvironment.hpp"
 
 namespace Foo {
 
@@ -19,7 +18,7 @@ namespace Foo {
 	    public:
 		Bar_Impl() 
 		    {
-			randomGenerator = AFL::getRandomGenerator();
+			randomGenerator = &TestingEnvironment::createRandomGenerator();
 		    }
 		~Bar_Impl() {}
 		Foo::Bar::FunT& Get_Foo() {return foo;}
@@ -29,21 +28,21 @@ namespace Foo {
 
 		void Regenerate()
 		    {
-			fum.V0 = randomGenerator.extractNumber();
-			foo.V0 = randomGenerator.extractNumber();
-			foo.V1 = randomGenerator.extractNumber();
-			foo.V2 = randomGenerator.extractNumber();
-			foo.V3 = randomGenerator.extractNumber();
-			foo.V4.P0 = randomGenerator.extractNumber();
-			foo.V4.P1 = randomGenerator.extractNumber();
-			foo.V5 = static_cast<Foo::SimpleT::Enum>(randomGenerator.extractNumber() % 3);
-			foo.V6 = static_cast<Foo::WithHolesT::Enum>((randomGenerator.extractNumber() % 10) + 1);
+			fum.V0 = randomGenerator->generate("Provider fum V0");
+			foo.V0 = randomGenerator->generate("Provider foo V0");
+			foo.V1 = randomGenerator->generate("Provider foo V1");
+			foo.V2 = randomGenerator->generate("Provider foo V2");
+			foo.V3 = randomGenerator->generate("Provider foo V3");
+			foo.V4.P0 = randomGenerator->generate("Provider foo V4 P0");
+			foo.V4.P1 = randomGenerator->generate("Provider foo V4 P1");
+			foo.V5 = static_cast<Foo::SimpleT::Enum>(randomGenerator->generate("Provider foo V5") % 3);
+			foo.V6 = static_cast<Foo::WithHolesT::Enum>((randomGenerator->generate("Provider foo V6") % 10) + 1);
 		    }
 	    private:
 		Foo::Bar::FumT fum;
 		Foo::Bar::FunT foo;
 
-		MT1337 randomGenerator;
+		RandomGenerator* randomGenerator;
 	    };
 
 	    class Bar_Provider_Impl : public I_Bar_Provider {

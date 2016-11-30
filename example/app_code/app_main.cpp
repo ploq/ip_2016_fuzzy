@@ -1,8 +1,7 @@
 #include "foo-bar-requirer-i_bar_requirer_factory.hpp"
 #include "foo-bar-provider-i_bar_provider_factory.hpp"
 
-#include "scheduler.hpp"
-#include "afllib.hpp"
+#include "testingenvironment.hpp"
 
 #include <iostream>
 #include <fstream>
@@ -14,6 +13,7 @@
 #include <ctime>
 #include "app_main.hpp"
 #include "PortStorage.hpp"
+#include "logger.hpp"
 namespace {
 
 // For simplicities global variables are used.
@@ -43,6 +43,16 @@ void APP_Name_Execute() {
         comp_y->Get_Port().Get_Fum().V0 = 42;
     }
 
+    //---
+    if (comp_x->Get_Port().Get_Foo().V0 / comp_x->Get_Port().Get_Foo().V1 > 2) {
+        comp_y->Get_Port().Get_Fum().V0 = 42;
+    }
+
+    if (comp_x->Get_Port().Get_Foo().V1 / comp_x->Get_Port().Get_Foo().V2 > 2) {
+        comp_y->Get_Port().Get_Fum().V0 = 42;
+    }
+    //---
+
     port_z->Get_Foo().V1 = comp_x->Get_Port().Get_Foo_V1();
 }
 
@@ -57,36 +67,36 @@ void APP_Name_Terminate() {
 void updateIO()
 {
     PortStorage::Regenerate();
-    //((Foo::Bar::Requirer::Bar_Impl*)(comp_x->Get_Port())).Regenerate();
-    //((Foo::Bar::Requirer::Bar_Impl*)(comp_y->Get_Port())).Regenerate();
-    //((Foo::Bar::Provider::Bar_Impl*)(comp_z->Get_Port())).Regenerate();
 }
 
 
 int main(int argc, char **argv)
-{        
-    std::string afl_data;
+{       
     std::ofstream output_file("output.txt", std::ios_base::app);
-    Scheduler sched;
-    std::cin >> afl_data;
-    if (afl_data.size() < sizeof(parameters)) return 0;
     
-    AFL::init(afl_data);
+    Logger::init();
 
+    if (!TestingEnvironment::init(argc, argv))
+    {
+	return 0;
+    }
 
-    srand(AFL::getSeed());
+    srand(TestingEnvironment::getSeed());
 
     APP_Name_Initialize();
-
-    for (int n = 0; n < 10000; n++) {
+    for (int n = 0; n < 10; n++) {
+	Logger::startlog();
 	PortStorage::Regenerate();//sched.updateIO(1,2,3); //V1 as constant, maybe autogenerate parameters?????
 	APP_Name_Execute();
+	Logger::endlog();
     }
     APP_Name_Terminate();
-    output_file << AFL::getCycles() << " " << AFL::getSeed() << std::endl;
+    output_file << TestingEnvironment::getCycles() << " " << TestingEnvironment::getSeed() << std::endl;
     output_file.close();
 
     PortStorage::CleanUp();
-	
+
+    TestingEnvironment::quit();
+    Logger::quit();
     return 0;
 }
