@@ -3,7 +3,7 @@
 #include <sstream>
 #include <string>
 
-MT1337::MT1337(int seed) : RandomGenerator("MT1337") {
+MT1337::MT1337(std::string name, int seed) : RandomGenerator(name) {
 	index = 624;
 	mt[0] = seed;
 	

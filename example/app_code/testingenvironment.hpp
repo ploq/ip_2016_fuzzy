@@ -2,6 +2,7 @@
 #define TESTINGENVIRONMENT_HPP
 
 #include <vector>
+#include <string>
 #include "randomgenerator.hpp"
 
 class TestingEnvironment {
@@ -25,7 +26,7 @@ public:
     static int getSeed(void);
     static char getRandType(void);
     
-    static RandomGenerator& createRandomGenerator();
+    static RandomGenerator& createRandomGenerator(std::string name);
 };
 
 #endif

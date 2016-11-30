@@ -18,7 +18,7 @@ namespace Foo {
 	    public:
 		Bar_Impl() 
 		    {
-			randomGenerator = &TestingEnvironment::createRandomGenerator();
+			randomGenerator = &TestingEnvironment::createRandomGenerator("Provider");
 		    }
 		~Bar_Impl() {}
 		Foo::Bar::FunT& Get_Foo() {return foo;}

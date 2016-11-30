@@ -20,7 +20,7 @@ namespace Foo {
 	    public:
 		Bar_Impl() 
 		    {
-			randomGenerator = &TestingEnvironment::createRandomGenerator();
+			randomGenerator = &TestingEnvironment::createRandomGenerator("Requirer");
 		    }
 		~Bar_Impl() {}
 		const Foo::Bar::FunT& Get_Foo() const {return foo;}
