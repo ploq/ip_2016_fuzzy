@@ -2,6 +2,7 @@
 #include "foo-bar-provider-i_bar_provider_factory.hpp"
 
 #include "testingenvironment.hpp"
+#include "portenvironment.hpp"
 
 #include <iostream>
 #include <fstream>
@@ -43,7 +44,7 @@ void APP_Name_Execute() {
         comp_y->Get_Port().Get_Fum().V0 = 42;
     }
 
-    //---
+    //--- ERROR GENERATING CODE
     if (comp_x->Get_Port().Get_Foo().V0 / comp_x->Get_Port().Get_Foo().V1 > 2) {
         comp_y->Get_Port().Get_Fum().V0 = 42;
     }
@@ -81,12 +82,17 @@ int main(int argc, char **argv)
 	return 0;
     }
 
+    if (!PortEnvironment::init())
+    {
+	return 0;
+    }
+
     srand(TestingEnvironment::getSeed());
 
     APP_Name_Initialize();
     for (int n = 0; n < 10; n++) {
 	Logger::startlog();
-	PortStorage::Regenerate();//sched.updateIO(1,2,3); //V1 as constant, maybe autogenerate parameters?????
+	PortEnvironment::regenerate();
 	APP_Name_Execute();
 	Logger::endlog();
     }
@@ -96,6 +102,7 @@ int main(int argc, char **argv)
 
     PortStorage::CleanUp();
 
+    PortEnvironment::quit();
     TestingEnvironment::quit();
     Logger::quit();
     return 0;

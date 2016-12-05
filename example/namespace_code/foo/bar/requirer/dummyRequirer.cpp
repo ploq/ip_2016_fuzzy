@@ -3,7 +3,8 @@
 #include "foo-bar-requirer-i_bar.hpp"
 #include "foo-bar-types.hpp"
 #include "testingenvironment.hpp"
-#include "PortHandler.hpp"
+#include "portenvironment.hpp"
+//#include "PortHandler.hpp"
 
 //Allting genereras i dextool
 
@@ -66,7 +67,8 @@ namespace Foo {
 	    };
 
 	    I_Bar_Requirer& Create_Instance(const std::string& name) {
-		return *(new Bar_Requirer_Impl((I_Bar*)GetPort<Bar_Impl, std::string>(name)));
+		//return *(new Bar_Requirer_Impl((I_Bar*)GetPort<Bar_Impl, std::string>(name, name)));
+		return PortEnvironment::createPort<Bar_Requirer_Impl, I_Bar, Bar_Impl, std::string>(name, name);
 	    }
 	}
     }

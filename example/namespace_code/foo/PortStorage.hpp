@@ -1,6 +1,8 @@
 #ifndef PORTSTORAGE_HPP
 #define PORTSTORAGE_HPP
 
+#include <string>
+
 class I_Regeneratable
 {
 public:
@@ -32,7 +34,7 @@ private:
 
 namespace PortStorage //TODO: Put in a class, with destructors and such
 {
-    void AddRegeneratable(I_Regeneratable* regen);
+    void AddRegeneratable(I_Regeneratable* regen, std::string name);
     void Regenerate();
     void CleanUp(); 
 }

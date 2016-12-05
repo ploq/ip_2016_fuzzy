@@ -1,4 +1,5 @@
 #include <map>
+#include <string>
 #include "PortStorage.hpp"
 
 template<typename Value, typename Key>
@@ -14,7 +15,7 @@ public:
 	    }
 	}
 
-    void* getPort(Key key)
+    void* getPort(Key key, std::string name)
 	{
 	    typename std::map<Key, Value*>::iterator it = m_ports.find(key);
 	    if (it != m_ports.end())
@@ -25,7 +26,7 @@ public:
 	    {
 		Value* val = new Value();
 		m_ports[key] = val;
-		PortStorage::AddRegeneratable(new Regeneratable_Impl<Value*>(val));
+		PortStorage::AddRegeneratable(new Regeneratable_Impl<Value*>(val), name);
 		return (void*)m_ports[key];
 	    }
 	}
@@ -42,8 +43,8 @@ private:
 };
 
 template<typename Value, typename Key>
-Value* GetPort(Key key)
+Value* GetPort(Key key, std::string name)
 {
     static PortHandler<Value, Key> portHandler;
-    return ((Value*)portHandler.getPort(key));
+    return ((Value*)portHandler.getPort(key, name));
 }

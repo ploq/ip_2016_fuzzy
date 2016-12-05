@@ -5,7 +5,18 @@
 #include <string>
 #include "randomgenerator.hpp"
 
-class TestingEnvironment {
+class TestingEnvironment
+{
+public:
+    TestingEnvironment();
+    static bool init(int argc, char **argv);
+    static void quit();
+    static int getCycles(void);
+    static int getSeed(void);
+    static char getRandType(void);
+    
+    static RandomGenerator& createRandomGenerator(std::string name);
+
 private:    
     struct parameters
     {
@@ -17,16 +28,6 @@ private:
     static parameters params;
     static int progress;
     static std::vector<RandomGenerator*> generators;
-
-public:
-    TestingEnvironment();
-    static bool init(int argc, char **argv);
-    static void quit();
-    static int getCycles(void);
-    static int getSeed(void);
-    static char getRandType(void);
-    
-    static RandomGenerator& createRandomGenerator(std::string name);
 };
 
 #endif
