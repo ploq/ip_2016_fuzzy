@@ -2,7 +2,6 @@
 #include "foo-bar-provider-i_bar_provider.hpp"
 #include "foo-bar-provider-i_bar.hpp"
 #include "foo-bar-types.hpp"
-//#include "PortHandler.hpp"
 #include "testingenvironment.hpp"
 #include "portenvironment.hpp"
 
@@ -58,7 +57,6 @@ namespace Foo {
 	    };
 
 	    I_Bar_Provider& Create_Instance(const std::string& name) {
-		//return *(new Bar_Provider_Impl((I_Bar*)GetPort<Bar_Impl, std::string>(name, name)));
 		return PortEnvironment::createPort<Bar_Provider_Impl, I_Bar, Bar_Impl, std::string>(name, name);
 	    }
 	}

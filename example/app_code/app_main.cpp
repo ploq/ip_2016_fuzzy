@@ -13,7 +13,6 @@
 #include <sys/syscall.h>
 #include <ctime>
 #include "app_main.hpp"
-#include "PortStorage.hpp"
 #include "logger.hpp"
 namespace {
 
