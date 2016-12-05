@@ -39,8 +39,8 @@ namespace Foo {
 		    { 
 			fum.V0 = randomGenerator->generate("Requirer fum V0");
 			foo.V0 = randomGenerator->generate("Requirer foo V0");
-			foo.V1 = randomGenerator->generate("Requirer foo V1") % 100000; //TODO: REMOVE
-			foo.V2 = randomGenerator->generate("Requirer foo V2") % 100000; //TODO: REMOVE
+			foo.V1 = randomGenerator->generate("Requirer foo V1", 0, 100000); //TODO: REMOVE
+			foo.V2 = randomGenerator->generate("Requirer foo V2", 0, 100000); //TODO: REMOVE
 			foo.V3 = randomGenerator->generate("Requirer foo V3");
 			foo.V4.P0 = randomGenerator->generate("Requirer foo V4 P0");
 			foo.V4.P1 = randomGenerator->generate("Requirer foo V4 P1");

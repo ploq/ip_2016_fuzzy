@@ -53,13 +53,13 @@ int64_t MT1337::generate(std::string note)
 
 int64_t MT1337::generate(std::string note, int64_t min, int64_t max)
 {
-    //TODO: TEST THIS!!!
     int64_t value = extractNumber();
     uint64_t difference = max - min;
     if (value > max || value < min)
     {
-	value = min + (value % difference);
-    }
+	value = min + (value % (difference + 1));
+    }   
+    Logger::log(name + ": " + note + ": " + std::to_string(value));
     return value;
 }
 
