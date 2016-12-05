@@ -1,0 +1,5 @@
+HOW TO RUN AFL:
+
+<afl-fuzz> -i <inputfolder> -o <outputfolder> -d <programname>
+
+../../../../../afl-2.33b/afl-fuzz -i input/ -o output/ -d ./app
