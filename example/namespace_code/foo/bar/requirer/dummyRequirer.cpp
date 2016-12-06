@@ -48,8 +48,8 @@ namespace Foo {
 
 		void Regenerate()
 		    { 
-			fum.V0 = randomGenerator->generate("Requirer fum V0");
-			foo.V0 = randomGenerator->generate("Requirer foo V0");
+			fum.V0 = randomGenerator->generate("Requirer fum V0", 0, 100000); //ERRORS
+			foo.V0 = randomGenerator->generate("Requirer foo V0", 0, 100000); //ERRORS
 			foo.V1 = randomGenerator->generate("Requirer foo V1", -1, 10);
 			foo.V2 = randomGenerator->generate("Requirer foo V2", -1, 10);
 			foo.V3 = randomGenerator->generate("Requirer foo V3", 0, 50000);
