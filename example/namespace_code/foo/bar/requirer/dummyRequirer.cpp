@@ -50,13 +50,13 @@ namespace Foo {
 		    { 
 			fum.V0 = randomGenerator->generate("Requirer fum V0");
 			foo.V0 = randomGenerator->generate("Requirer foo V0");
-			foo.V1 = randomGenerator->generate("Requirer foo V1", 0, 100000); //TODO: REMOVE
-			foo.V2 = randomGenerator->generate("Requirer foo V2", 0, 100000); //TODO: REMOVE
-			foo.V3 = randomGenerator->generate("Requirer foo V3");
+			foo.V1 = randomGenerator->generate("Requirer foo V1", -1, 10);
+			foo.V2 = randomGenerator->generate("Requirer foo V2", -1, 10);
+			foo.V3 = randomGenerator->generate("Requirer foo V3", 0, 50000);
 			foo.V4.P0 = randomGenerator->generate("Requirer foo V4 P0");
-			foo.V4.P1 = randomGenerator->generate("Requirer foo V4 P1");
-			foo.V5 = static_cast<Foo::SimpleT::Enum>(randomGenerator->generate("Requirer foo V5") % 3);
-			foo.V6 = static_cast<Foo::WithHolesT::Enum>((randomGenerator->generate("Requirer foo V6") % 10) + 1);
+			foo.V4.P1 = randomGenerator->generate("Requirer foo V4 P1", 0, 50000);
+			foo.V5 = static_cast<Foo::SimpleT::Enum>(randomGenerator->generate("Requirer foo V5", 0, 2));
+			foo.V6 = static_cast<Foo::WithHolesT::Enum>(randomGenerator->generate("Requirer foo V6", 1, 10));
 		    }
 	    private:
 		Foo::Bar::FumT fum;

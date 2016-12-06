@@ -32,16 +32,6 @@ void APP_Name_Execute() {
         comp_y->Get_Port().Get_Fum().V0 = 42;
     }
 
-    //--- ERROR GENERATING CODE
-    if (comp_x->Get_Port().Get_Foo().V0 / comp_x->Get_Port().Get_Foo().V1 > 2) {
-        comp_y->Get_Port().Get_Fum().V0 = 42;
-    }
-
-    if (comp_x->Get_Port().Get_Foo().V1 / comp_x->Get_Port().Get_Foo().V2 > 2) {
-        comp_y->Get_Port().Get_Fum().V0 = 42;
-    }
-    //---
-
     port_z->Get_Foo().V1 = comp_x->Get_Port().Get_Foo_V1();
 }
 
