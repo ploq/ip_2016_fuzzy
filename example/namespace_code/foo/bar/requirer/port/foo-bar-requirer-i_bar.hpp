@@ -14,14 +14,14 @@ public:
     I_Bar();
     virtual ~I_Bar();
 
-    virtual const Foo::Bar::FunT& Get_Foo() const = 0;
-    virtual int64_t Get_Foo_V0() const = 0;
-    virtual Foo::Bar::MyIntT Get_Foo_V1() const = 0;
-    virtual Foo::Bar::MyIntT Get_Foo_V2() const = 0;
-    virtual Foo::MyHeightT Get_Foo_V3() const = 0;
-    virtual const Foo::BundleT& Get_Foo_V4() const = 0;
-    virtual Foo::SimpleT::Enum Get_Foo_V5() const = 0;
-    virtual Foo::WithHolesT::Enum Get_Foo_V6() const = 0;
+    virtual const Foo::Bar::FunT& Get_Fun() const = 0;
+    virtual int64_t Get_Fun_V0() const = 0;
+    virtual Foo::Bar::MyIntT Get_Fun_V1() const = 0;
+    virtual Foo::Bar::MyIntT Get_Fun_V2() const = 0;
+    virtual Foo::MyHeightT Get_Fun_V3() const = 0;
+    virtual const Foo::BundleT& Get_Fun_V4() const = 0;
+    virtual Foo::SimpleT::Enum Get_Fun_V5() const = 0;
+    virtual Foo::WithHolesT::Enum Get_Fun_V6() const = 0;
 
     virtual Foo::Bar::FumT& Get_Fum() = 0;
     virtual void Put_Fum(const int64_t V0) = 0;
