@@ -1,6 +1,5 @@
  
 #include "portstorage.hpp"
-#include "logger.hpp"
 
 #include <vector>
 
@@ -17,8 +16,7 @@ void PortStorage::Regenerate()
 {
     for (unsigned int i = 0; i < regeneratables.size(); ++i)
     {
-	Logger::log(names[i] + ":");
-	regeneratables[i]->Regenerate();
+      	regeneratables[i]->Regenerate();
     }
 }
 
