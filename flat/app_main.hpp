@@ -1,5 +1,6 @@
 #ifndef APP_MAIN_HPP
 #define APP_MAIN_HPP
+#include <iostream>
 // Required
 void APP_Name_Initialize();
 void APP_Name_Execute();

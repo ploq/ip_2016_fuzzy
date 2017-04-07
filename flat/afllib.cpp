@@ -24,11 +24,11 @@ char AFL::getRandType() {
 }
 
 MT1337 AFL::getRandomGenerator() {
-    MT1337 mt (params.seed);
+    MT1337 mt ("", params.seed);
     progress++;
     for (int i = 0; i < progress; ++i)
     {
-	mt.twistIt();
+//	mt.twistIt();
     }
     return mt;
 }

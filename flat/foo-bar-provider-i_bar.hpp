@@ -14,7 +14,7 @@ public:
     I_Bar();
     virtual ~I_Bar();
 
-    virtual Foo::Bar::FunT& Get_Foo() = 0;
+    virtual Foo::Bar::FunT& Get_Fun() = 0;
     virtual void Put_Fun(const int64_t V0, const Foo::Bar::MyIntT V1, const Foo::Bar::MyIntT V2, const Foo::MyHeightT V3, const Foo::BundleT& V4, const Foo::SimpleT::Enum V5, const Foo::WithHolesT::Enum V6) = 0;
 
     virtual const Foo::Bar::FumT& Get_Fum() const = 0;

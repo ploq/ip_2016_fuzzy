@@ -1,19 +1,8 @@
 #include "foo-bar-requirer-i_bar_requirer_factory.hpp"
 #include "foo-bar-provider-i_bar_provider_factory.hpp"
 
-#include "scheduler.hpp"
-#include "afllib.hpp"
-
-#include <iostream>
-#include <fstream>
-#include <math.h>
-#include <cstdlib>
-#include <unistd.h>
-#include <linux/random.h>
-#include <sys/syscall.h>
-#include <ctime>
 #include "app_main.hpp"
-#include "PortStorage.hpp"
+
 namespace {
 
 // For simplicities global variables are used.
@@ -39,11 +28,17 @@ void APP_Name_Initialize() {
 }
 
 void APP_Name_Execute() {
-    if (comp_x->Get_Port().Get_Foo().V0 > 2) {
+    if (comp_x->Get_Port().Get_Fun().V0 > 2) {
         comp_y->Get_Port().Get_Fum().V0 = 42;
     }
 
-    port_z->Get_Foo().V1 = comp_x->Get_Port().Get_Foo_V1();
+    //ERRORS
+    if (comp_x->Get_Port().Get_Fun_V0() / comp_x->Get_Port().Get_Fum().V0 > 2) {
+        comp_y->Get_Port().Get_Fum().V0 = 42;
+    }
+    //------
+
+    port_z->Get_Fun().V1 = comp_x->Get_Port().Get_Fun_V1();
 }
 
 void APP_Name_Terminate() {
@@ -52,41 +47,4 @@ void APP_Name_Terminate() {
     delete comp_z;
 
     // note that port_z is NOT deleted.
-}
-
-void updateIO()
-{
-    PortStorage::Regenerate();
-    //((Foo::Bar::Requirer::Bar_Impl*)(comp_x->Get_Port())).Regenerate();
-    //((Foo::Bar::Requirer::Bar_Impl*)(comp_y->Get_Port())).Regenerate();
-    //((Foo::Bar::Provider::Bar_Impl*)(comp_z->Get_Port())).Regenerate();
-}
-
-
-int main(int argc, char **argv)
-{        
-    std::string afl_data;
-    std::ofstream output_file("output.txt", std::ios_base::app);
-    Scheduler sched;
-    std::cin >> afl_data;
-    if (afl_data.size() < sizeof(parameters)) return 0;
-    
-    AFL::init(afl_data);
-
-
-    srand(AFL::getSeed());
-
-    APP_Name_Initialize();
-
-    for (int n = 0; n < 10000; n++) {
-	PortStorage::Regenerate();//sched.updateIO(1,2,3); //V1 as constant, maybe autogenerate parameters?????
-	APP_Name_Execute();
-    }
-    APP_Name_Terminate();
-    output_file << AFL::getCycles() << " " << AFL::getSeed() << std::endl;
-    output_file.close();
-
-    PortStorage::CleanUp();
-	
-    return 0;
 }

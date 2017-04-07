@@ -1,14 +1,20 @@
 #ifndef MT1337_H
 #define MT1337_H
 
-class MT1337 {
+#include "randomgenerator.hpp"
+
+class MT1337 : public RandomGenerator {
     int mt[624];
     int index;
-public:
-    MT1337() = default;
-    MT1337(int seed);
+    
     int extractNumber();
     void twistIt();
+public:
+    MT1337(std::string name, int seed);
+    int64_t generate(std::string note);
+    int64_t generate(std::string note, int64_t min, int64_t max);
+    uint64_t getSeed();
+    void nextSeed();
 };
 
 #endif
