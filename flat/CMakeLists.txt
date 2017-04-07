@@ -8,4 +8,5 @@ include_directories(
 file(GLOB SRC *.cpp)
 add_executable(app "${SRC}")
 #target_link_libraries(app foo)
+set_property(TARGET app PROPERTY CXX_STANDARD 11)
 target_link_libraries(app /usr/local/opt/openssl/lib/libcrypto.a)
