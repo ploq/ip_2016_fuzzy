@@ -1,5 +1,4 @@
 #include "mt1337.hpp"
-#include "logger.hpp"
 #include <sstream>
 #include <string>
 
@@ -47,7 +46,6 @@ void MT1337::twistIt() {
 int64_t MT1337::generate(std::string note)
 {
     int64_t value = extractNumber();
-    Logger::log(name + ": " + note + ": " + std::to_string(value));
     return value;
 }
 
@@ -59,7 +57,6 @@ int64_t MT1337::generate(std::string note, int64_t min, int64_t max)
     {
 	value = min + (value % (difference + 1));
     }   
-    Logger::log(name + ": " + note + ": " + std::to_string(value));
     return value;
 }
 
