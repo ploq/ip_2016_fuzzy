@@ -43,7 +43,7 @@ public:
     /*
       Creates and returns a new random number generator. The name is given to the generator for logging purposes. 
      */
-    static RandomGenerator& createRandomGenerator(std::string name);
+    static RandomGenerator& createRandomGenerator();
 
 private:    
     struct parameters

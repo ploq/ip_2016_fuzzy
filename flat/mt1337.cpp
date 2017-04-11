@@ -2,7 +2,7 @@
 #include <sstream>
 #include <string>
 
-MT1337::MT1337(std::string name, int seed) : RandomGenerator(name) {
+MT1337::MT1337(int seed) : RandomGenerator() {
 	index = 624;
 	mt[0] = seed;
 	
@@ -43,13 +43,13 @@ void MT1337::twistIt() {
 	index = 0;
 }
 
-int64_t MT1337::generate(std::string note)
+int64_t MT1337::generate()
 {
     int64_t value = extractNumber();
     return value;
 }
 
-int64_t MT1337::generate(std::string note, int64_t min, int64_t max)
+int64_t MT1337::generate(int64_t min, int64_t max)
 {
     int64_t value = extractNumber();
     uint64_t difference = max - min;

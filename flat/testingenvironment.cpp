@@ -41,8 +41,8 @@ char TestingEnvironment::getRandType() {
     return params.randtype;
 }
 
-RandomGenerator& TestingEnvironment::createRandomGenerator(std::string name) {
-    RandomGenerator* rng = new MT1337 (name, params.seed);
+RandomGenerator& TestingEnvironment::createRandomGenerator() {
+    RandomGenerator* rng = new MT1337 (params.seed);
     progress++;
     for (int i = 0; i < progress; ++i)
     {

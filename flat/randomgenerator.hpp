@@ -10,7 +10,7 @@ public:
     /*
       Constructor taking a name. The name is used for logging.
      */
-    RandomGenerator(std::string n) : name(n) {};
+    RandomGenerator() = default;
 
     /*
       Virtual destructor, nothing special.
@@ -20,12 +20,12 @@ public:
     /*
       Generates a new random value. The note is a message written to the log. It is expected that the function logs the generated value alongside the note.
      */
-    virtual int64_t generate(std::string note) = 0;
+    virtual int64_t generate() = 0;
 
     /*
       Same as above, but generates values within a range between min and max (inclusive).
      */
-    virtual int64_t generate(std::string note, int64_t min, int64_t max) = 0;
+    virtual int64_t generate(int64_t min, int64_t max) = 0;
 
     /*
       Gets the current seed value.

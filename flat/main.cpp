@@ -20,8 +20,8 @@ int main(int argc, char **argv)
     srand(TestingEnvironment::getSeed());
 
     APP_Name_Initialize();
-    for (int n = 0; n < TestingEnvironment::getCycles(); n++) {
-	    PortEnvironment::regenerate();
+    for (int n = 0; n < 10000; n++) {
+	 PortEnvironment::regenerate();
 	    APP_Name_Execute();
     }
 
