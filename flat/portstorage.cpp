@@ -26,5 +26,6 @@ void PortStorage::CleanUp()
     {
 	delete regeneratables[i];
     }
+    regeneratables.clear();
 }
  

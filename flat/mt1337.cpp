@@ -2,7 +2,7 @@
 #include <sstream>
 #include <string>
 
-MT1337::MT1337(int seed) : RandomGenerator() {
+MT1337::MT1337(const int seed) : RandomGenerator() {
 	index = 624;
 	mt[0] = seed;
 	
@@ -13,6 +13,7 @@ MT1337::MT1337(int seed) : RandomGenerator() {
 };
 
 int MT1337::extractNumber() {
+    //return 1337;
 	int y = 0;
 	if (index >= 624) {
 		twistIt();

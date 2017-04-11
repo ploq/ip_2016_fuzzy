@@ -13,12 +13,12 @@ namespace Foo {
                 RandomGenerator* randomGenerator;
             public:
                  I_Bar_Impl() {
-                    randomGenerator = &TestingEnvironment::createRandomGenerator();
+                    randomGenerator = &TestingEnvironment::createRandomGenerator("Provider");
                 }
                  ~I_Bar_Impl() {
                 }
                 void Regenerate() {
-                    fun.V0 = randomGenerator->generate();
+                    fun.V0 = randomGenerator->generate(-9223372036854775808, 9223372036854775807);
                     fun.V1 = randomGenerator->generate(-1, 10);
                     fun.V2 = 5;
                     fun.V3 = randomGenerator->generate(0, 50000);
@@ -26,7 +26,7 @@ namespace Foo {
                     fun.V4.P0 = randomGenerator->generate();
                     fun.V5 = static_cast<Foo::SimpleT::Enum>(randomGenerator->generate(0, 2));
                     fun.V6 = static_cast<Foo::WithHolesT::Enum>(randomGenerator->generate(1, 10));
-                    fum.V0 = randomGenerator->generate();
+                    fum.V0 = randomGenerator->generate(-9223372036854775808, 9223372036854775807);
                 }
                 Foo::Bar::FunT & Get_Fun() {
                     return fun;
@@ -87,12 +87,12 @@ namespace Foo {
                 RandomGenerator* randomGenerator;
             public:
                  I_Bar_Impl() {
-                    randomGenerator = &TestingEnvironment::createRandomGenerator();
+                    randomGenerator = &TestingEnvironment::createRandomGenerator("Requirer");
                 }
                  ~I_Bar_Impl() {
                 }
                 void Regenerate() {
-                    fun.V0 = randomGenerator->generate();
+                    fun.V0 = randomGenerator->generate(-9223372036854775808, 9223372036854775807);
                     fun.V1 = randomGenerator->generate(-1, 10);
                     fun.V2 = 5;
                     fun.V3 = randomGenerator->generate(0, 50000);
@@ -100,7 +100,7 @@ namespace Foo {
                     fun.V4.P0 = randomGenerator->generate();
                     fun.V5 = static_cast<Foo::SimpleT::Enum>(randomGenerator->generate(0, 2));
                     fun.V6 = static_cast<Foo::WithHolesT::Enum>(randomGenerator->generate(1, 10));
-                    fum.V0 = randomGenerator->generate();
+                    fum.V0 = randomGenerator->generate(-9223372036854775808, 9223372036854775807);
                 }
                 const Foo::Bar::FunT & Get_Fun() const {
                     return fun;

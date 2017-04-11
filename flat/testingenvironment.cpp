@@ -13,10 +13,12 @@ TestingEnvironment::TestingEnvironment() {}
 bool TestingEnvironment::init(int argc, char **argv) {
     std::string afl_data;
     std::cin >> afl_data;
-    if (afl_data.size() < sizeof(parameters)) return false;
+    
+    //if (afl_data.size() < sizeof(parameters)) return false; //8k exec/s cost
 
-    std::string output1 = sha256(afl_data);
-    params = *((parameters*) output1.c_str());
+    std::string output1 = sha256(afl_data); //1k exec/s cost
+    params = *((parameters*) output1.c_str()); //no cost
+
     return true;
 }
 
