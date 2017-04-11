@@ -20,7 +20,7 @@ namespace Foo {
                 void Regenerate() {
                     fun.V0 = randomGenerator->generate("Provider Fun V0", -9223372036854775808, 9223372036854775807);
                     fun.V1 = randomGenerator->generate("Provider Fun V1", -1, 10);
-                    fun.V2 = randomGenerator->generate("Provider Fun V2", -1, 10);
+                    fun.V2 = 5;
                     fun.V3 = randomGenerator->generate("Provider Fun V3", 0, 50000);
                     fun.V4.P1 = randomGenerator->generate("Provider Fun V4", 0, 50000);
                     fun.V4.P0 = randomGenerator->generate("Provider Fun V4");
@@ -51,12 +51,6 @@ namespace Foo {
             }
             I_Bar::~I_Bar() {
             }
-        } //NS:Provider
-    } //NS:Bar
-} //NS:Foo
-namespace Foo {
-    namespace Bar {
-        namespace Provider {
             class I_Bar_Provider_Impl : public I_Bar_Provider {
             private:
                 I_Bar* port;
@@ -77,12 +71,6 @@ namespace Foo {
             }
             I_Bar_Provider::~I_Bar_Provider() {
             }
-        } //NS:Provider
-    } //NS:Bar
-} //NS:Foo
-namespace Foo {
-    namespace Bar {
-        namespace Provider {
             Foo::Bar::Provider::I_Bar_Provider & Create_Instance(const std::__1::string & name) {
                 return PortEnvironment::createPort<I_Bar_Provider_Impl, I_Bar, I_Bar_Impl, const std::__1::string >(name, name);
             }
@@ -106,7 +94,7 @@ namespace Foo {
                 void Regenerate() {
                     fun.V0 = randomGenerator->generate("Requirer Fun V0", -9223372036854775808, 9223372036854775807);
                     fun.V1 = randomGenerator->generate("Requirer Fun V1", -1, 10);
-                    fun.V2 = randomGenerator->generate("Requirer Fun V2", -1, 10);
+                    fun.V2 = 5;
                     fun.V3 = randomGenerator->generate("Requirer Fun V3", 0, 50000);
                     fun.V4.P1 = randomGenerator->generate("Requirer Fun V4", 0, 50000);
                     fun.V4.P0 = randomGenerator->generate("Requirer Fun V4");
@@ -149,12 +137,6 @@ namespace Foo {
             }
             I_Bar::~I_Bar() {
             }
-        } //NS:Requirer
-    } //NS:Bar
-} //NS:Foo
-namespace Foo {
-    namespace Bar {
-        namespace Requirer {
             class I_Bar_Requirer_Impl : public I_Bar_Requirer {
             private:
                 I_Bar* port;
@@ -175,12 +157,6 @@ namespace Foo {
             }
             I_Bar_Requirer::~I_Bar_Requirer() {
             }
-        } //NS:Requirer
-    } //NS:Bar
-} //NS:Foo
-namespace Foo {
-    namespace Bar {
-        namespace Requirer {
             Foo::Bar::Requirer::I_Bar_Requirer & Create_Instance(const std::__1::string & name) {
                 return PortEnvironment::createPort<I_Bar_Requirer_Impl, I_Bar, I_Bar_Impl, const std::__1::string >(name, name);
             }

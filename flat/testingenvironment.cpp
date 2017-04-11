@@ -1,7 +1,7 @@
 #include "testingenvironment.hpp"
 
 #include <iostream>
-#include "picosha256.hpp"
+#include "sha256.hpp"
 #include "mt1337.hpp"
 
 TestingEnvironment::parameters TestingEnvironment::params = {};
@@ -15,9 +15,7 @@ bool TestingEnvironment::init(int argc, char **argv) {
     std::cin >> afl_data;
     if (afl_data.size() < sizeof(parameters)) return false;
 
-    std::string output1;
-    picosha2::hash256_hex_string(afl_data, output1);
-
+    std::string output1 = sha256(afl_data);
     params = *((parameters*) output1.c_str());
     return true;
 }

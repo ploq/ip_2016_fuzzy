@@ -15,30 +15,6 @@ namespace Foo {
 } //NS:Foo
 namespace Foo {
     namespace Bar {
-        namespace Provider {
-        } //NS:Provider
-    } //NS:Bar
-} //NS:Foo
-namespace Foo {
-    namespace Bar {
-        namespace Provider {
-        } //NS:Provider
-    } //NS:Bar
-} //NS:Foo
-namespace Foo {
-    namespace Bar {
-        namespace Requirer {
-        } //NS:Requirer
-    } //NS:Bar
-} //NS:Foo
-namespace Foo {
-    namespace Bar {
-        namespace Requirer {
-        } //NS:Requirer
-    } //NS:Bar
-} //NS:Foo
-namespace Foo {
-    namespace Bar {
         namespace Requirer {
         } //NS:Requirer
     } //NS:Bar
