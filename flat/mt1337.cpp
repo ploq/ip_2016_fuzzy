@@ -2,7 +2,7 @@
 #include <sstream>
 #include <string>
 
-MT1337::MT1337(const int seed) : RandomGenerator() {
+MT1337::MT1337(const unsigned int seed) : RandomGenerator() {
 	index = 624;
 	mt[0] = seed;
 	

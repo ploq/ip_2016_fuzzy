@@ -28,12 +28,12 @@ public:
     /*
       Returns the number of times which the SUT should run.
      */
-    static int getCycles(void);
+    static unsigned int getCycles(void);
 
     /*
       Unused. To be moved to randomgenerator.
      */
-    static int getSeed(void);
+    static unsigned int getSeed(void);
 
     /*
       Unused. To be moved to randomgenerator.
@@ -48,9 +48,9 @@ public:
 private:    
     struct parameters
     {
-	int cycles;
-	int seed;
-	char randtype;
+	unsigned char randtype;
+	unsigned int cycles;
+	unsigned int seed;
     };
 
     static parameters params;

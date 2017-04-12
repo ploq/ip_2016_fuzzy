@@ -10,7 +10,7 @@ class MT1337 : public RandomGenerator {
     int extractNumber();
     void twistIt();
 public:
-    MT1337(const int seed);
+    MT1337(const unsigned int seed);
     int64_t generate();
     int64_t generate(int64_t min, int64_t max);
     uint64_t getSeed();
