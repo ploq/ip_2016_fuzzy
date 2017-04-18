@@ -14,21 +14,18 @@ using namespace std;
 
 TestingEnvironment::TestingEnvironment() {}
 
-bool TestingEnvironment::init(int argc, char **argv) {    
+bool TestingEnvironment::init() {    
     std::vector<unsigned char> afl_data;
     unsigned char c;
-    while (!cin.eof()) {
+    while (!cin.eof() && !cin.bad()) {
         afl_data.push_back(cin.get());
     }
 
     //First byte tells us the length of afl_data, check if it's correct
-    std::cout << afl_data.size()-2 << " : " << (int)afl_data[0] << std::endl;
-    std::cout << (afl_data.size()-1 != afl_data[0]) << std::endl;
 
     if ( afl_data.size() < sizeof(unsigned char) + sizeof(unsigned int)*2
 	 ||  afl_data.size()-2 != afl_data[0])
     {
-	//std::cout << afl_data.size()-1 << " : " << afl_data[0] << std::endl;
 	    return false;
     }
     
@@ -43,14 +40,17 @@ bool TestingEnvironment::init(int argc, char **argv) {
     unsigned char CYCLES_MAX_BYTES = afl_data[2];
     unsigned int cycles;
 
+    if (CYCLES_MAX_BYTES > 50)
+	return false;
+
     int offset = 3;
     for (int i = 0; i < CYCLES_MAX_BYTES ; i++) {
         cycles += afl_data[offset + i];
+      
     }
 
     TestingEnvironment::params.cycles = cycles;
-    std::cout << TestingEnvironment::params.cycles 
-      << " : " << cycles << std::endl;
+    // << " : " << cycles << std::endl;
     
     /* Seed should contain a amount of bytes read from afl_data.
        The amount is specified by the first byte of the seed range.
@@ -60,13 +60,14 @@ bool TestingEnvironment::init(int argc, char **argv) {
     unsigned int seed;
 
     offset = 3 + CYCLES_MAX_BYTES + 1;
+    if (SEED_MAX_BYTES > 50)
+	return false;
     for (int i = 0; i < SEED_MAX_BYTES ; i++) {
         seed += afl_data[offset + i];
     }
 
     TestingEnvironment::params.seed = seed;
-    std::cout << TestingEnvironment::params.seed 
-     << " : " << seed << std::endl;
+    afl_data.clear();
 
     return true;
 }

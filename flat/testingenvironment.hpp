@@ -18,7 +18,7 @@ public:
 
       Returns true if successful, false if not.
      */
-    static bool init(int argc, char **argv);
+    static bool init();
 
     /*
       Deinitializes the testing environment.

@@ -21,6 +21,7 @@ public:
 
     ~Regeneratable_Impl()
 	{
+	   
 	}
 
     void Regenerate()
