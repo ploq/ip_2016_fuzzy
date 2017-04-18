@@ -10,24 +10,26 @@ TestingEnvironment::parameters TestingEnvironment::params = {};
 int TestingEnvironment::progress = 0;
 std::vector<RandomGenerator*> TestingEnvironment::generators;
 
+using namespace std;
+
 TestingEnvironment::TestingEnvironment() {}
 
-bool TestingEnvironment::init(int argc, char **argv) {
-    std::stringstream ss;
-    std::string _afl_data;
-    std::cin >> _afl_data;
-    
-    
-    std::vector<unsigned char> afl_data(_afl_data.begin(), _afl_data.end());
+bool TestingEnvironment::init(int argc, char **argv) {    
+    std::vector<unsigned char> afl_data;
+    unsigned char c;
+    while (!cin.eof()) {
+        afl_data.push_back(cin.get());
+    }
 
     //First byte tells us the length of afl_data, check if it's correct
-    std::cout << afl_data.size()-1 << " : " << (int)afl_data[0] << std::endl;
+    std::cout << afl_data.size()-2 << " : " << (int)afl_data[0] << std::endl;
     std::cout << (afl_data.size()-1 != afl_data[0]) << std::endl;
+
     if ( afl_data.size() < sizeof(unsigned char) + sizeof(unsigned int)*2
-	 ||  afl_data.size()-1 != afl_data[0])
+	 ||  afl_data.size()-2 != afl_data[0])
     {
 	//std::cout << afl_data.size()-1 << " : " << afl_data[0] << std::endl;
-	return false;
+	    return false;
     }
     
     //randtype should always be second byte of afl_data
