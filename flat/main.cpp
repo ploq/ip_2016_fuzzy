@@ -12,7 +12,7 @@ int main(int argc, char **argv)
     while (__AFL_LOOP(1000)) { 
 	if (!TestingEnvironment::init(argc, argv))
 	{
-	    return 0;
+	    continue;
 	}
 
 	if (!PortEnvironment::init())
@@ -21,7 +21,9 @@ int main(int argc, char **argv)
 	}
 	
 	APP_Name_Initialize();
-	for (int n = 0; n < 10000; n++) {
+	std::cout << TestingEnvironment::getCycles() << std::endl;
+	std::cout << TestingEnvironment::getSeed() << std::endl;
+	for (int n = 0; n < TestingEnvironment::getCycles(); n++) {
 	    PortEnvironment::regenerate();
 	    APP_Name_Execute();
 	}
