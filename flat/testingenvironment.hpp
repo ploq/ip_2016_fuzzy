@@ -49,8 +49,8 @@ private:
     struct parameters
     {
 	unsigned char randtype;
-	unsigned int cycles;
-	unsigned int seed;
+	unsigned char cycles;
+	unsigned char seed;
     };
 
     static parameters params;
