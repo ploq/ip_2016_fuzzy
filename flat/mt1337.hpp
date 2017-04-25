@@ -4,15 +4,17 @@
 #include "randomgenerator.hpp"
 
 class MT1337 : public RandomGenerator {
-    int mt[624];
+    long long mt[624];
     int index;
     
-    int extractNumber();
+    long long extractNumber();
     void twistIt();
 public:
     MT1337(const unsigned int seed);
-    int64_t generate();
-    int64_t generate(int64_t min, int64_t max);
+    long long generate();
+    long long generate(long long min, long long max);
+    long long generate(const std::map<std::string, std::vector<int>> &vars, std::string name);
+    long long generate(const std::map<std::string, std::vector<int>> &vars, std::string name, long long min, long long max);
     uint64_t getSeed();
     void nextSeed();
 };

@@ -1,25 +1,42 @@
-#include "testingenvironment.hpp"
-#include "portenvironment.hpp"
+#include "main.hpp"
 
 #include <iostream>
 #include <fstream>
-#include "app_main.hpp"
-#include <iostream>
+#include <map>
+#include <string>
 
 int main(int argc, char **argv)
 {       
-    
-    while (__AFL_LOOP(10)) { 
+    std::map<std::string, std::map<std::string, std::vector<int>>> namespaces;
+    std::map<std::string, std::vector<int>> vars;
+    std::vector<int> vec;
+
+    while (__AFL_LOOP(1000)) { 
 	if (!TestingEnvironment::init())
 	{
 	    continue;
-	    //return 0;
 	}
 
-	
 	APP_Name_Initialize();
+	
 	for (int n = 0; n < TestingEnvironment::getCycles(); n++) {
-	    PortStorage::Regenerate();
+	    vec = {120, 200, 3, n};
+	    vars["fun.V0"] = vec;
+	    namespaces["Foo::Bar::Requirer"] = vars; 
+
+	    switch (TestingEnvironment::getRandType()) {
+	    case RANDOM_GENERATOR:
+		{
+		    PortStorage::Regenerate(namespaces);
+		    break;
+		}
+	    case STATIC_GENERATOR:
+		{
+		    PortStorage::Regenerate(namespaces);
+		    break;
+		}
+	    }
+
 	    APP_Name_Execute();
 	}
 

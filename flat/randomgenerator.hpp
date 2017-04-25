@@ -3,29 +3,41 @@
 
 #include <stdint.h>
 #include <string>
+#include <map>
+#include <vector>
 
 class RandomGenerator
 {
 public:
     /*
-      Constructor taking a name. The name is used for logging.
+      Constructor
      */
     RandomGenerator() = default;
 
     /*
-      Virtual destructor, nothing special.
+      Virtual destructor
      */
     virtual ~RandomGenerator() {};
 
     /*
-      Generates a new random value. The note is a message written to the log. It is expected that the function logs the generated value alongside the note.
+      Generates random value
      */
-    virtual int64_t generate() = 0;
+    virtual long long generate() = 0;
 
     /*
-      Same as above, but generates values within a range between min and max (inclusive).
+      Generates random value within min and max range
      */
-    virtual int64_t generate(int64_t min, int64_t max) = 0;
+    virtual long long generate(long long min, long long max) = 0;
+    
+    /*
+      Generates static value
+     */
+    virtual long long generate(const std::map<std::string, std::vector<int>> &vars, std::string name) = 0;
+
+    /*
+      Generates static value for variables using ranges
+     */
+    virtual long long generate(const std::map<std::string, std::vector<int>> &vars, std::string name, long long min, long long max) = 0;
 
     /*
       Gets the current seed value.

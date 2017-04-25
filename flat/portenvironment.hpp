@@ -2,6 +2,8 @@
 #define PORTENVIRONMENT_HPP
 
 #include <string>
+#include <vector>
+#include <map>
 #include "porthandler.hpp"
 
 class PortEnvironment
@@ -21,12 +23,6 @@ public:
       Empty quit function. Should be used for deinitializing the port environment.
      */
     static void quit();
-
-    /*
-      Generates new values for all ports created through createPort. It expects all ports to contain
-      the function Regenerate().
-    */
-    static void regenerate();
 
     /*
       Creates a requirer/provider for a port. For an example usage, see the dummyRequirer.cpp and 

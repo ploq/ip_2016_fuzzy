@@ -10,7 +10,7 @@ def generate_bytes(amount):
 
 for i in range(MAX_FILES):
     with open ("./input/testdata_{}.txt".format(i), "wb") as f:
-        randtype = generate_bytes(1)
+        randtype = [bytes([randint(0,1)])]
         cycles = generate_bytes(randint(5,10))
         seed = generate_bytes(randint(6,15))
         #print(randtype, cycles, seed)

@@ -1,6 +1,6 @@
 #include "mt1337.hpp"
 #include <sstream>
-#include <string>
+#include <iostream>
 
 MT1337::MT1337(const unsigned int seed) : RandomGenerator() {
 	index = 624;
@@ -12,9 +12,9 @@ MT1337::MT1337(const unsigned int seed) : RandomGenerator() {
 	} 
 };
 
-int MT1337::extractNumber() {
+long long MT1337::extractNumber() {
     //return 1337;
-	int y = 0;
+	long long y = 0;
 	if (index >= 624) {
 		twistIt();
 		index = 0;
@@ -44,15 +44,35 @@ void MT1337::twistIt() {
 	index = 0;
 }
 
-int64_t MT1337::generate()
+long long MT1337::generate()
+{
+    long long value = extractNumber();
+    return value;
+}
+
+long long MT1337::generate(long long min, long long max)
+{
+    long long value = extractNumber();
+    uint64_t difference = max - min;
+    if (value > max || value < min)
+    {
+	value = min + (value % (difference + 1));
+    }   
+    return value;
+}
+
+long long MT1337::generate(const std::map<std::string, std::vector<int>> &vars, std::string name)
 {
     int64_t value = extractNumber();
     return value;
 }
 
-int64_t MT1337::generate(int64_t min, int64_t max)
+long long MT1337::generate(const std::map<std::string, std::vector<int>> &vars, std::string name, long long min, long long max)
 {
-    int64_t value = extractNumber();
+    if (vars.count(name) > 0) 
+	std::cout << vars.at(name)[3] << std::endl;
+
+    long long value = extractNumber();
     uint64_t difference = max - min;
     if (value > max || value < min)
     {

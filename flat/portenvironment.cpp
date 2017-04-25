@@ -14,8 +14,3 @@ bool PortEnvironment::init()
 void PortEnvironment::quit()
 {
 }
-
-void PortEnvironment::regenerate()
-{
-    PortStorage::Regenerate();
-}

@@ -1,5 +1,6 @@
 #include <map>
 #include <string>
+#include <iostream>
 #include "portstorage.hpp"
 
 template<typename Value, typename Key>
@@ -31,11 +32,11 @@ public:
 	    }
 	}
 
-    void RegeneratePorts()
+    void RegeneratePorts(std::map<std::string, std::vector<int>> vars)
 	{
 	    for (typename std::map<Key, Value*>::iterator it = m_ports.begin(); it != m_ports.end(); ++it)
 	    {
-		it->second->Regenerate();
+		it->second->Regenerate(vars);
 	    }
 	}
 private:
