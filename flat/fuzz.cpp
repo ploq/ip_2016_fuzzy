@@ -17,6 +17,17 @@ namespace Foo {
                 }
                  ~I_Bar_Impl() {
                 }
+		 void Regenerate() {
+                    fun.V0 = randomGenerator->generate(-9223372036854775808, 9223372036854775807);
+                    fun.V1 = randomGenerator->generate(-1, 10);
+                    fun.V2 = 5;
+                    fun.V3 = randomGenerator->generate(0, 50000);
+                    fun.V4.P1 = randomGenerator->generate(0, 50000);
+                    fun.V4.P0 = randomGenerator->generate(10, 2000);
+                    fun.V5 = static_cast<Foo::SimpleT::Enum>(randomGenerator->generate(0, 2));
+                    fun.V6 = static_cast<Foo::WithHolesT::Enum>(randomGenerator->generate(1, 10));
+                    fum.V0 = randomGenerator->generate(-9223372036854775808, 9223372036854775807);
+                }
                 void Regenerate(const std::map<std::string, std::vector<int>> &vars) {
                     fun.V0 = randomGenerator->generate(vars, "fun.V0", -9223372036854775808, 9223372036854775807);
                     fun.V1 = randomGenerator->generate(vars, "fun.V1", -1, 10);
@@ -94,6 +105,17 @@ namespace Foo {
                 }
                  ~I_Bar_Impl() {
                 }
+		void Regenerate() {
+                    fun.V0 = randomGenerator->generate(-9223372036854775808, 9223372036854775807);
+                    fun.V1 = randomGenerator->generate(-1, 10);
+                    fun.V2 = 5;
+                    fun.V3 = randomGenerator->generate(0, 50000);
+                    fun.V4.P1 = randomGenerator->generate(0, 50000);
+                    fun.V4.P0 = randomGenerator->generate(10, 2000);
+                    fun.V5 = static_cast<Foo::SimpleT::Enum>(randomGenerator->generate(0, 2));
+                    fun.V6 = static_cast<Foo::WithHolesT::Enum>(randomGenerator->generate(1, 10));
+                    fum.V0 = randomGenerator->generate(-9223372036854775808, 9223372036854775807);
+                }
                 void Regenerate(const std::map<std::string, std::vector<int>> &vars) {
                     fun.V0 = randomGenerator->generate(vars, "fun.V0", -9223372036854775808, 9223372036854775807);
                     fun.V1 = randomGenerator->generate(vars, "fun.V1", -1, 10);
@@ -104,7 +126,7 @@ namespace Foo {
                     fun.V5 = static_cast<Foo::SimpleT::Enum>(randomGenerator->generate(vars, "fun.V5", 0, 2));
                     fun.V6 = static_cast<Foo::WithHolesT::Enum>(randomGenerator->generate(vars, "fun.V6", 1, 10));
                     fum.V0 = randomGenerator->generate(vars, "fum.V0", -9223372036854775808, 9223372036854775807);
-                }
+                }		
                 const Foo::Bar::FunT & Get_Fun() const {
                     return fun;
                 }
