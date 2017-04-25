@@ -6,8 +6,8 @@
 #include "app_main.hpp"
 
 enum {
-    RANDOM_GENERATOR = 0,
+RANDOM_GENERATOR = 0,
     STATIC_GENERATOR = 1,
-	};
+    };
 
 #endif // MAIN_HPP

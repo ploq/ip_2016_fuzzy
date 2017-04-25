@@ -1,14 +1,18 @@
 #include "testingenvironment.hpp"
+#include "mt1337.hpp"
 
 #include <iostream>
 #include <stdio.h>
 #include <string.h>
+#include <string>
 #include <iomanip> 
-#include "mt1337.hpp"
+#include <fstream>
+#include <sstream>
 
 TestingEnvironment::parameters TestingEnvironment::params = {};
 int TestingEnvironment::progress = 0;
 std::vector<RandomGenerator*> TestingEnvironment::generators;
+std::map<std::string, std::map<std::string, std::vector<int>>> TestingEnvironment::namespaces;
 
 using namespace std;
 
@@ -50,7 +54,6 @@ bool TestingEnvironment::init() {
     }
 
     TestingEnvironment::params.cycles = cycles;
-    // << " : " << cycles << std::endl;
     
     /* Seed should contain a amount of bytes read from afl_data.
        The amount is specified by the first byte of the seed range.
@@ -92,6 +95,47 @@ unsigned int TestingEnvironment::getCycles() {
 char TestingEnvironment::getRandType() {
     return params.randtype;
 }
+
+void TestingEnvironment::readConfig(int curr_cycles) {
+    std::ifstream config;
+    config.open("flat/config.txt");
+
+    if (!config.is_open() || config.fail()) {
+	return;
+    }
+
+    std::stringstream ss;
+    std::string line;
+
+    while(std::getline(config, line))
+    {
+	ss << line;
+    }
+
+    std::string ns, var;
+    int min_cycles, max_cycles, val;
+
+    while(!ss.bad() && !ss.eof()) {
+	ss >> ns;
+	ss >> var;
+	ss >> min_cycles;
+	ss >> max_cycles;
+	ss >> val;
+
+	std::vector<int> vec = {min_cycles, max_cycles, val, curr_cycles};
+	std::map<std::string, std::vector<int>> vars;
+	vars[var] = vec;
+	namespaces[ns] = vars;
+    }
+    
+    config.close();
+}
+
+std::map<std::string, std::map<std::string, std::vector<int>>> 
+    TestingEnvironment::getConfig() {
+    return namespaces;
+}
+
 
 RandomGenerator& TestingEnvironment::createRandomGenerator() {
     RandomGenerator* rng = new MT1337 (params.seed);

@@ -13,7 +13,6 @@ MT1337::MT1337(const unsigned int seed) : RandomGenerator() {
 };
 
 long long MT1337::extractNumber() {
-    //return 1337;
 	long long y = 0;
 	if (index >= 624) {
 		twistIt();
@@ -52,26 +51,56 @@ long long MT1337::generate()
 
 long long MT1337::generate(long long min, long long max)
 {
-    long long value = extractNumber();
-    uint64_t difference = max - min;
-    if (value > max || value < min)
-    {
-	value = min + (value % (difference + 1));
-    }   
-    return value;
+    return generateRangeValue(min, max);
 }
 
 long long MT1337::generate(const std::map<std::string, std::vector<int>> &vars, std::string name)
 {
-    int64_t value = extractNumber();
+    long long value;
+    if (vars.count(name) > 0) {
+	int64_t min_cycles = vars.at(name)[0];
+	int64_t max_cycles = vars.at(name)[1];
+	int64_t curr_cycles = vars.at(name)[3];
+	if (min_cycles <= curr_cycles && curr_cycles <= max_cycles) {
+	    value = vars.at(name)[2];
+	}
+	else {
+	    value = extractNumber();
+	}
+    }
+    else {
+	value = extractNumber();
+    }
     return value;
 }
 
 long long MT1337::generate(const std::map<std::string, std::vector<int>> &vars, std::string name, long long min, long long max)
 {
-    if (vars.count(name) > 0) 
-	std::cout << vars.at(name)[3] << std::endl;
+    long long value;
+    if (vars.count(name) > 0) {
+	int64_t min_cycles = vars.at(name)[0];
+	int64_t max_cycles = vars.at(name)[1];
+	int64_t curr_cycles = vars.at(name)[3];
+	if (min_cycles <= curr_cycles && curr_cycles <= max_cycles) {
+	    value = vars.at(name)[2];
+	    /*std::cout << vars.at(name)[0] << " "
+	      << vars.at(name)[1] << " "
+	      << vars.at(name)[2] << " "
+	      << vars.at(name)[3] << " " << std::endl;
+	    */
+	    std::cout << vars.at(name)[3] << std::endl;
+	}
+	else {
+	    value = generateRangeValue(min, max);
+	}
+    }
+    else {
+	value = generateRangeValue(min, max);
+    }
+    return value;
+}
 
+long long MT1337::generateRangeValue(const long long &min, const long long &max) {
     long long value = extractNumber();
     uint64_t difference = max - min;
     if (value > max || value < min)

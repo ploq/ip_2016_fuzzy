@@ -9,6 +9,7 @@ class MT1337 : public RandomGenerator {
     
     long long extractNumber();
     void twistIt();
+    long long generateRangeValue(const long long &min, const long long &max);
 public:
     MT1337(const unsigned int seed);
     long long generate();
