@@ -49,7 +49,7 @@ public:
     /*
       Returns config map
      */
-    static std::map<std::string, std::map<std::string, std::vector<int>>> getConfig();
+    static std::map<std::string, std::map<std::string, std::vector<std::vector<int>>>> getConfig();
     
     /*
       Creates and returns a new random number generator.
@@ -67,7 +67,7 @@ private:
     static parameters params;
     static int progress;
     static std::vector<RandomGenerator*> generators;
-    static std::map<std::string, std::map<std::string, std::vector<int>>> namespaces;
+    static std::map<std::string, std::map<std::string, std::vector<std::vector<int>>>> namespaces;
 };
 
 #endif

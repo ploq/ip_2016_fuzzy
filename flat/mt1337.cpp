@@ -45,8 +45,7 @@ void MT1337::twistIt() {
 
 long long MT1337::generate()
 {
-    long long value = extractNumber();
-    return value;
+    return extractNumber();
 }
 
 long long MT1337::generate(long long min, long long max)
@@ -54,50 +53,37 @@ long long MT1337::generate(long long min, long long max)
     return generateRangeValue(min, max);
 }
 
-long long MT1337::generate(const std::map<std::string, std::vector<int>> &vars, std::string name)
+long long MT1337::generate(const std::map<std::string, std::vector<std::vector<int>>> &vars, std::string name)
 {
-    long long value;
     if (vars.count(name) > 0) {
-	int64_t min_cycles = vars.at(name)[0];
-	int64_t max_cycles = vars.at(name)[1];
-	int64_t curr_cycles = vars.at(name)[3];
-	if (min_cycles <= curr_cycles && curr_cycles <= max_cycles) {
-	    value = vars.at(name)[2];
-	}
-	else {
-	    value = extractNumber();
+	for (auto v : vars.at(name)) { 
+	    int64_t min_cycles = v[0];
+	    int64_t max_cycles = v[1];
+	    int64_t curr_cycles = v[3];
+	    if (min_cycles <= curr_cycles && curr_cycles <= max_cycles) {
+		return v[2];
+	    }   
 	}
     }
-    else {
-	value = extractNumber();
-    }
-    return value;
+	
+    return extractNumber();
 }
 
-long long MT1337::generate(const std::map<std::string, std::vector<int>> &vars, std::string name, long long min, long long max)
+long long MT1337::generate(const std::map<std::string, std::vector<std::vector<int>>> &vars, std::string name, long long min, long long max)
 {
-    long long value;
     if (vars.count(name) > 0) {
-	int64_t min_cycles = vars.at(name)[0];
-	int64_t max_cycles = vars.at(name)[1];
-	int64_t curr_cycles = vars.at(name)[3];
-	if (min_cycles <= curr_cycles && curr_cycles <= max_cycles) {
-	    value = vars.at(name)[2];
-	    /*std::cout << vars.at(name)[0] << " "
-	      << vars.at(name)[1] << " "
-	      << vars.at(name)[2] << " "
-	      << vars.at(name)[3] << " " << std::endl;
-	    */
-	    std::cout << vars.at(name)[3] << std::endl;
-	}
-	else {
-	    value = generateRangeValue(min, max);
+	for (auto v : vars.at(name)) { 
+	    
+	    int64_t min_cycles = v[0];
+	    int64_t max_cycles = v[1];
+	    int64_t curr_cycles = v[3];
+	    if (min_cycles <= curr_cycles && curr_cycles <= max_cycles) {
+   		return v[2];
+	    }   
 	}
     }
-    else {
-	value = generateRangeValue(min, max);
-    }
-    return value;
+
+    return generateRangeValue(min, max);
 }
 
 long long MT1337::generateRangeValue(const long long &min, const long long &max) {

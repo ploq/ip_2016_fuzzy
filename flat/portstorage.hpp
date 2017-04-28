@@ -12,7 +12,7 @@ class I_Regeneratable
 public:
     virtual ~I_Regeneratable() {}
     virtual void Regenerate() = 0;
-    virtual void Regenerate(const std::map<std::string, std::vector<int>> &vars) = 0;
+    virtual void Regenerate(const std::map<std::string, std::vector<std::vector<int>>> &vars) = 0;
     virtual std::string getNamespace() = 0;
 };
 
@@ -37,7 +37,7 @@ public:
     }
 
     //Static
-    void Regenerate(const std::map<std::string, std::vector<int>> &vars)
+    void Regenerate(const std::map<std::string, std::vector<std::vector<int>>> &vars)
     {
 	p->Regenerate(vars);
     }
@@ -55,7 +55,7 @@ namespace PortStorage //TODO: Put in a class, with destructors and such
 {
     void AddRegeneratable(I_Regeneratable* regen, std::string name);
     void Regenerate();
-    void Regenerate(const std::map<std::string, std::map<std::string, std::vector<int>>> &namespaces);
+    void Regenerate(const std::map<std::string, std::map<std::string, std::vector<std::vector<int>>>> &namespaces);
     void CleanUp(); 
 }
 

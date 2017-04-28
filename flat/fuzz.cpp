@@ -28,7 +28,7 @@ namespace Foo {
                     fun.V6 = static_cast<Foo::WithHolesT::Enum>(randomGenerator->generate(1, 10));
                     fum.V0 = randomGenerator->generate(-9223372036854775807, 9223372036854775807);
                 }
-                void Regenerate(const std::map<std::string, std::vector<int>> &vars) {
+                void Regenerate(const std::map<std::string, std::vector<std::vector<int>>> &vars) {
                     fun.V0 = randomGenerator->generate(vars, "fun.V0", -9223372036854775807, 9223372036854775807);
                     fun.V1 = randomGenerator->generate(vars, "fun.V1", -1, 10);
                     fun.V2 = 5;
@@ -116,7 +116,7 @@ namespace Foo {
                     fun.V6 = static_cast<Foo::WithHolesT::Enum>(randomGenerator->generate(1, 10));
                     fum.V0 = randomGenerator->generate(-9223372036854775807, 9223372036854775807);
                 }
-                void Regenerate(const std::map<std::string, std::vector<int>> &vars) {
+                void Regenerate(const std::map<std::string, std::vector<std::vector<int>>> &vars) {
                     fun.V0 = randomGenerator->generate(vars, "fun.V0", -9223372036854775807, 9223372036854775807);
                     fun.V1 = randomGenerator->generate(vars, "fun.V1", -1, 10);
                     fun.V2 = 5;

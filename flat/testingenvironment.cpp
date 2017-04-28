@@ -12,7 +12,7 @@
 TestingEnvironment::parameters TestingEnvironment::params = {};
 int TestingEnvironment::progress = 0;
 std::vector<RandomGenerator*> TestingEnvironment::generators;
-std::map<std::string, std::map<std::string, std::vector<int>>> TestingEnvironment::namespaces;
+std::map<std::string, std::map<std::string, std::vector<std::vector<int>>>> TestingEnvironment::namespaces;
 
 using namespace std;
 
@@ -123,15 +123,30 @@ void TestingEnvironment::readConfig(int curr_cycles) {
 	ss >> val;
 
 	std::vector<int> vec = {min_cycles, max_cycles, val, curr_cycles};
-	std::map<std::string, std::vector<int>> vars;
-	vars[var] = vec;
-	namespaces[ns] = vars;
+	namespaces[ns][var].push_back(vec);
     }
+    /*
+    for (auto it : namespaces) {
+	std::cout << it.first << " contains: " << std::endl;
+	for (auto iter : it.second) {
+	    std::cout << iter.first << " =>";
+	    for (auto vec : iter.second) {
+		std::cout << " {";
+		for (auto i : vec) {
+		    std::cout << " " << i; 
+		} 
+		std::cout << "}";
+	    }
+	    std::cout << std::endl;
+	}
+	std::cout << std::endl;
+	}*/
+    
     
     config.close();
 }
-
-std::map<std::string, std::map<std::string, std::vector<int>>> 
+ 
+std::map<std::string, std::map<std::string, std::vector<std::vector<int>>>> 
     TestingEnvironment::getConfig() {
     return namespaces;
 }

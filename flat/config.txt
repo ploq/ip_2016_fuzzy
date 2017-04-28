@@ -1,2 +1,4 @@
-Foo::Bar::Provider fun.V0 100 200 5
-Foo::Bar::Provider fun.V1 100 200 7
+Foo::Bar::Requirer fun.V0 500 502 13
+Foo::Bar::Provider fun.V0 500 502 13
+Foo::Bar::Requirer fun.V0 100 500 14
+Foo::Bar::Provider fun.V0 100 500 14

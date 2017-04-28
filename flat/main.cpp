@@ -11,9 +11,10 @@ int main(int argc, char **argv)
 	APP_Name_Initialize();
 	
 	for (int n = 0; n < TestingEnvironment::getCycles(); n++) {
+	    //NOTE: use static generator only for static demonstration
 	    switch (TestingEnvironment::getRandType()) {
 	    case RANDOM_GENERATOR:
-		{
+		{ 
 		    PortStorage::Regenerate();
 		    break;
 		}
@@ -29,7 +30,7 @@ int main(int argc, char **argv)
 		    break;
 		}
 	    }
-
+    
 	    APP_Name_Execute();
 	}
 

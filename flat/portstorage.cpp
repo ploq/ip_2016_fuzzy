@@ -26,7 +26,7 @@ void PortStorage::Regenerate()
 }
 
 //Static values
-void PortStorage::Regenerate(const std::map<std::string, std::map<std::string, std::vector<int>>> &namespaces)
+void PortStorage::Regenerate(const std::map<std::string, std::map<std::string, std::vector<std::vector<int>>>> &namespaces)
 {
     for (unsigned int i = 0; i < regeneratables.size(); ++i)
     {
