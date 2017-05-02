@@ -6,6 +6,8 @@
 #include <string>
 #include "randomgenerator.hpp"
 
+using namespace std;
+
 class TestingEnvironment
 {
 public:
@@ -42,14 +44,14 @@ public:
     static char getRandType(void);
 
     /*
-      Reads config file into SUT. Path is hardcoded to ./config.txt
+      Reads config file into SUT. Path is hardcoded to ./flat/config.txt
      */
-    //static void readConfig(int curr_cycles);
+    static void readConfig();
 
     /*
       Returns config map
      */
-    //static const std::map<std::string, std::map<std::string, std::vector<std::vector<int>>>> & getConfig();
+    static const map<string, map<string, vector<vector<int>>>> &getConfig();
     
     /*
       Creates and returns a new random number generator.
@@ -66,8 +68,8 @@ private:
 
     static parameters params;
     static int progress;
-    static std::vector<RandomGenerator*> generators;
-    // static std::map<std::string, std::map<std::string, std::vector<std::vector<int>>>> namespaces;
+    static vector<RandomGenerator*> generators;
+    static map<string, map<string, vector<vector<int>>>> namespaces;
 };
 
 #endif

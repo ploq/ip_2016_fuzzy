@@ -2,7 +2,7 @@
 
 int main(int argc, char **argv)
 {       
-    readConfig();
+    TestingEnvironment::readConfig();
 
     while (__AFL_LOOP(1000)) { 
 	if (!TestingEnvironment::init())
@@ -13,17 +13,17 @@ int main(int argc, char **argv)
 	APP_Name_Initialize();
 	
 	for (int n = 0; n < TestingEnvironment::getCycles(); n++) {
-	    //NOTE: use static generator only for static demonstration
+	    //NOTE: use static generator only for demonstration
 	    switch (TestingEnvironment::getRandType()) {
 	    case RANDOM_GENERATOR:
 		{ 
-		    PortStorage::Regenerate();
+		    //PortStorage::Regenerate();
+		    PortStorage::Regenerate(TestingEnvironment::getConfig(), n);
 		    break;
 		}
 	    case STATIC_GENERATOR:
 		{
-		    //TestingEnvironment::readConfig(n);
-		    PortStorage::Regenerate(getConfig(), n);
+		    PortStorage::Regenerate(TestingEnvironment::getConfig(), n);
 		    break;
 		}
 	    default:
