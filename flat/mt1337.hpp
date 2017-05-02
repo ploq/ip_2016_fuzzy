@@ -14,8 +14,8 @@ public:
     MT1337(const unsigned int seed);
     long long generate();
     long long generate(long long min, long long max);
-    long long generate(const std::map<std::string, std::vector<std::vector<int>>> &vars, std::string name);
-    long long generate(const std::map<std::string, std::vector<std::vector<int>>> &vars, std::string name, long long min, long long max);
+    long long generate(const std::map<std::string, std::vector<std::vector<int>>> &vars, std::string name, const int64_t &curr_cycles);
+    long long generate(const std::map<std::string, std::vector<std::vector<int>>> &vars, std::string name, long long min, long long max, const int64_t &curr_cycles);
     uint64_t getSeed();
     void nextSeed();
 };

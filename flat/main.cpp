@@ -2,6 +2,8 @@
 
 int main(int argc, char **argv)
 {       
+    readConfig();
+
     while (__AFL_LOOP(1000)) { 
 	if (!TestingEnvironment::init())
 	{
@@ -20,8 +22,8 @@ int main(int argc, char **argv)
 		}
 	    case STATIC_GENERATOR:
 		{
-		    TestingEnvironment::readConfig(n);
-		    PortStorage::Regenerate(TestingEnvironment::getConfig());
+		    //TestingEnvironment::readConfig(n);
+		    PortStorage::Regenerate(getConfig(), n);
 		    break;
 		}
 	    default:

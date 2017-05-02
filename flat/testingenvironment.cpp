@@ -6,20 +6,18 @@
 #include <string.h>
 #include <string>
 #include <iomanip> 
-#include <fstream>
-#include <sstream>
+
+using namespace std;
 
 TestingEnvironment::parameters TestingEnvironment::params = {};
 int TestingEnvironment::progress = 0;
-std::vector<RandomGenerator*> TestingEnvironment::generators;
-std::map<std::string, std::map<std::string, std::vector<std::vector<int>>>> TestingEnvironment::namespaces;
+vector<RandomGenerator*> TestingEnvironment::generators;
 
-using namespace std;
 
 TestingEnvironment::TestingEnvironment() {}
 
 bool TestingEnvironment::init() {    
-    std::vector<unsigned char> afl_data;
+    vector<unsigned char> afl_data;
     unsigned char c;
     while (!cin.eof() && !cin.bad()) {
         afl_data.push_back(cin.get());
@@ -95,62 +93,6 @@ unsigned int TestingEnvironment::getCycles() {
 char TestingEnvironment::getRandType() {
     return params.randtype;
 }
-
-void TestingEnvironment::readConfig(int curr_cycles) {
-    std::ifstream config;
-    config.open("flat/config.txt");
-
-    if (!config.is_open() || config.fail()) {
-	return;
-    }
-
-    std::stringstream ss;
-    std::string line;
-
-    while(std::getline(config, line))
-    {
-	ss << line;
-    }
-
-    std::string ns, var;
-    int min_cycles, max_cycles, val;
-
-    while(!ss.bad() && !ss.eof()) {
-	ss >> ns;
-	ss >> var;
-	ss >> min_cycles;
-	ss >> max_cycles;
-	ss >> val;
-
-	std::vector<int> vec = {min_cycles, max_cycles, val, curr_cycles};
-	namespaces[ns][var].push_back(vec);
-    }
-    /*
-    for (auto it : namespaces) {
-	std::cout << it.first << " contains: " << std::endl;
-	for (auto iter : it.second) {
-	    std::cout << iter.first << " =>";
-	    for (auto vec : iter.second) {
-		std::cout << " {";
-		for (auto i : vec) {
-		    std::cout << " " << i; 
-		} 
-		std::cout << "}";
-	    }
-	    std::cout << std::endl;
-	}
-	std::cout << std::endl;
-	}*/
-    
-    
-    config.close();
-}
- 
-std::map<std::string, std::map<std::string, std::vector<std::vector<int>>>> 
-    TestingEnvironment::getConfig() {
-    return namespaces;
-}
-
 
 RandomGenerator& TestingEnvironment::createRandomGenerator() {
     RandomGenerator* rng = new MT1337 (params.seed);

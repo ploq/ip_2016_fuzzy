@@ -44,12 +44,12 @@ public:
     /*
       Reads config file into SUT. Path is hardcoded to ./config.txt
      */
-    static void readConfig(int curr_cycles);
+    //static void readConfig(int curr_cycles);
 
     /*
       Returns config map
      */
-    static std::map<std::string, std::map<std::string, std::vector<std::vector<int>>>> getConfig();
+    //static const std::map<std::string, std::map<std::string, std::vector<std::vector<int>>>> & getConfig();
     
     /*
       Creates and returns a new random number generator.
@@ -67,7 +67,7 @@ private:
     static parameters params;
     static int progress;
     static std::vector<RandomGenerator*> generators;
-    static std::map<std::string, std::map<std::string, std::vector<std::vector<int>>>> namespaces;
+    // static std::map<std::string, std::map<std::string, std::vector<std::vector<int>>>> namespaces;
 };
 
 #endif

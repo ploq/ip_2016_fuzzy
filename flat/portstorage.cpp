@@ -26,12 +26,12 @@ void PortStorage::Regenerate()
 }
 
 //Static values
-void PortStorage::Regenerate(const std::map<std::string, std::map<std::string, std::vector<std::vector<int>>>> &namespaces)
+void PortStorage::Regenerate(const std::map<std::string, std::map<std::string, std::vector<std::vector<int>>>> &namespaces, const int64_t &curr_cycles)
 {
     for (unsigned int i = 0; i < regeneratables.size(); ++i)
     {
 	if (namespaces.count(regeneratables[i]->getNamespace()) > 0) {
-	    regeneratables[i]->Regenerate(namespaces.at(regeneratables[i]->getNamespace()));
+	    regeneratables[i]->Regenerate(namespaces.at(regeneratables[i]->getNamespace()), curr_cycles);
 	}
 	else {
 	    /*
