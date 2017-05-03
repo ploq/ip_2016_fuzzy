@@ -2,14 +2,17 @@
 #define TESTINGENVIRONMENT_HPP
 
 #include <vector>
+#include <map>
 #include <string>
 #include "randomgenerator.hpp"
+
+using namespace std;
 
 class TestingEnvironment
 {
 public:
     /*
-      Constructor doing nothing...
+      Constructor
      */
     TestingEnvironment();
 
@@ -36,12 +39,22 @@ public:
     static unsigned int getSeed(void);
 
     /*
-      Unused. To be moved to randomgenerator.
+      Returns which type of randomgenerator SUT has
      */
     static char getRandType(void);
+
+    /*
+      Reads config file into SUT. Path is hardcoded to ./flat/config.txt
+     */
+    static void readConfig();
+
+    /*
+      Returns config map
+     */
+    static const map<string, map<string, vector<vector<int>>>> &getConfig();
     
     /*
-      Creates and returns a new random number generator. The name is given to the generator for logging purposes. 
+      Creates and returns a new random number generator.
      */
     static RandomGenerator& createRandomGenerator();
 
@@ -55,7 +68,8 @@ private:
 
     static parameters params;
     static int progress;
-    static std::vector<RandomGenerator*> generators;
+    static vector<RandomGenerator*> generators;
+    static map<string, map<string, vector<vector<int>>>> namespaces;
 };
 
 #endif

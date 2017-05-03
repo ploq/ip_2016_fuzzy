@@ -13,7 +13,6 @@ MT1337::MT1337(const unsigned int seed) : RandomGenerator() {
 };
 
 long long MT1337::extractNumber() {
-    //return 1337;
 	long long y = 0;
 	if (index >= 624) {
 		twistIt();
@@ -46,32 +45,48 @@ void MT1337::twistIt() {
 
 long long MT1337::generate()
 {
-    long long value = extractNumber();
-    return value;
+    return extractNumber();
 }
 
 long long MT1337::generate(long long min, long long max)
 {
-    long long value = extractNumber();
-    uint64_t difference = max - min;
-    if (value > max || value < min)
-    {
-	value = min + (value % (difference + 1));
-    }   
-    return value;
+    return generateRangeValue(min, max);
 }
 
-long long MT1337::generate(const std::map<std::string, std::vector<int>> &vars, std::string name)
+long long MT1337::generate(const std::map<std::string, std::vector<std::vector<int>>> &vars, std::string name, const int64_t &curr_cycles)
 {
-    int64_t value = extractNumber();
-    return value;
+    if (vars.count(name) > 0) {
+	for (auto v : vars.at(name)) { 
+	    int64_t min_cycles = v[0];
+	    int64_t max_cycles = v[1];
+	    //int64_t curr_cycles = v[3];
+	    if (min_cycles <= curr_cycles && curr_cycles <= max_cycles) {
+		return v[2];
+	    }   
+	}
+    }
+	
+    return extractNumber();
 }
 
-long long MT1337::generate(const std::map<std::string, std::vector<int>> &vars, std::string name, long long min, long long max)
+long long MT1337::generate(const std::map<std::string, std::vector<std::vector<int>>> &vars, std::string name, long long min, long long max, const int64_t &curr_cycles)
 {
-    if (vars.count(name) > 0) 
-	std::cout << vars.at(name)[3] << std::endl;
+    if (vars.count(name) > 0) {
+	for (auto v : vars.at(name)) { 
+	    
+	    int64_t min_cycles = v[0];
+	    int64_t max_cycles = v[1];
+	    //int64_t curr_cycles = v[3];
+	    if (min_cycles <= curr_cycles && curr_cycles <= max_cycles) {
+   		return v[2];
+	    }   
+	}
+    }
 
+    return generateRangeValue(min, max);
+}
+
+long long MT1337::generateRangeValue(const long long &min, const long long &max) {
     long long value = extractNumber();
     uint64_t difference = max - min;
     if (value > max || value < min)

@@ -9,12 +9,13 @@ class MT1337 : public RandomGenerator {
     
     long long extractNumber();
     void twistIt();
+    long long generateRangeValue(const long long &min, const long long &max);
 public:
     MT1337(const unsigned int seed);
     long long generate();
     long long generate(long long min, long long max);
-    long long generate(const std::map<std::string, std::vector<int>> &vars, std::string name);
-    long long generate(const std::map<std::string, std::vector<int>> &vars, std::string name, long long min, long long max);
+    long long generate(const std::map<std::string, std::vector<std::vector<int>>> &vars, std::string name, const int64_t &curr_cycles);
+    long long generate(const std::map<std::string, std::vector<std::vector<int>>> &vars, std::string name, long long min, long long max, const int64_t &curr_cycles);
     uint64_t getSeed();
     void nextSeed();
 };

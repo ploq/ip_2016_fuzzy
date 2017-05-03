@@ -1,21 +1,27 @@
 #include "testingenvironment.hpp"
+#include "mt1337.hpp"
 
 #include <iostream>
 #include <stdio.h>
 #include <string.h>
+#include <string>
 #include <iomanip> 
-#include "mt1337.hpp"
+#include <vector>
+#include <sstream>
+#include <map>
+#include <fstream>
+
+using namespace std;
 
 TestingEnvironment::parameters TestingEnvironment::params = {};
 int TestingEnvironment::progress = 0;
-std::vector<RandomGenerator*> TestingEnvironment::generators;
-
-using namespace std;
+vector<RandomGenerator*> TestingEnvironment::generators;
+map<string, map<string, vector<vector<int>>>> TestingEnvironment::namespaces;
 
 TestingEnvironment::TestingEnvironment() {}
 
 bool TestingEnvironment::init() {    
-    std::vector<unsigned char> afl_data;
+    vector<unsigned char> afl_data;
     unsigned char c;
     while (!cin.eof() && !cin.bad()) {
         afl_data.push_back(cin.get());
@@ -50,7 +56,6 @@ bool TestingEnvironment::init() {
     }
 
     TestingEnvironment::params.cycles = cycles;
-    // << " : " << cycles << std::endl;
     
     /* Seed should contain a amount of bytes read from afl_data.
        The amount is specified by the first byte of the seed range.
@@ -81,6 +86,55 @@ void TestingEnvironment::quit()
     generators.clear();
 }
 
+void TestingEnvironment::readConfig() {
+    ifstream config;
+    config.open("flat/config.txt");
+
+    if (!config.is_open() || config.fail()) {
+	return;
+    }
+
+    stringstream ss;
+    string line;
+
+    while(std::getline(config, line))
+    {
+	ss << line;
+    }
+
+    string ns, var;
+    int min_cycles, max_cycles, val;
+
+    while(!ss.bad() && !ss.eof()) {
+	ss >> ns;
+	ss >> var;
+	ss >> min_cycles;
+	ss >> max_cycles;
+	ss >> val;
+
+	vector<int> vec = {min_cycles, max_cycles, val};
+	TestingEnvironment::namespaces[ns][var].push_back(vec);
+    }
+    /*
+      for (auto it : namespaces) {
+      std::cout << it.first << " contains: " << std::endl;
+      for (auto iter : it.second) {
+      std::cout << iter.first << " =>";
+      for (auto vec : iter.second) {
+      std::cout << " {";
+      for (auto i : vec) {
+      std::cout << " " << i; 
+      } 
+      std::cout << "}";
+      }
+      std::cout << std::endl;
+      }
+      std::cout << std::endl;
+      }*/
+    
+    config.close();
+}
+
 unsigned int TestingEnvironment::getSeed() {
     return params.seed;
 }
@@ -91,6 +145,10 @@ unsigned int TestingEnvironment::getCycles() {
 
 char TestingEnvironment::getRandType() {
     return params.randtype;
+}
+
+const map<string, map<string, vector<vector<int>>>> &TestingEnvironment::getConfig() {
+    return namespaces;
 }
 
 RandomGenerator& TestingEnvironment::createRandomGenerator() {

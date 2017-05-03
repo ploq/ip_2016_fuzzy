@@ -3,6 +3,9 @@
 
 #include "app_main.hpp"
 
+#include <random>
+
+
 namespace {
 
 // For simplicities global variables are used.
@@ -12,6 +15,12 @@ Foo::Bar::Requirer::I_Bar_Requirer* comp_y;
 Foo::Bar::Provider::I_Bar_Provider* comp_z;
 
 Foo::Bar::Provider::I_Bar* port_z;
+
+    std::random_device rd;     // only used once to initialise (seed) engine
+    std::mt19937 rng(rd());    // random-number engine used (Mersenne-Twister in this case)
+    std::uniform_int_distribution<int> uni(0,8000); // guaranteed unbiased
+
+
 
 } // NS:
 
@@ -28,12 +37,15 @@ void APP_Name_Initialize() {
 }
 
 void APP_Name_Execute() {
-    if (comp_x->Get_Port().Get_Fun().V0 > 2) {
-        comp_y->Get_Port().Get_Fum().V0 = 42;
+
+    if (comp_y->Get_Port().Get_Fun().V0 == 1337) {
+	if (comp_x->Get_Port().Get_Fun().V0 == 1337) {
+	    comp_y->Get_Port().Put_Fum(uni(rng));
 	}
+    }
 
     //ERRORS
-    if (comp_x->Get_Port().Get_Fun_V0() / comp_x->Get_Port().Get_Fum().V0 > 2) {
+    if (comp_x->Get_Port().Get_Fun_V0() / comp_y->Get_Port().Get_Fum().V0 > 2) {
         comp_y->Get_Port().Get_Fum().V0 = 42;
     }
     //------

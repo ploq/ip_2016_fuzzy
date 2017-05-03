@@ -5,9 +5,11 @@
 #include "portenvironment.hpp"
 #include "app_main.hpp"
 
+using namespace std;
+
 enum {
     RANDOM_GENERATOR = 0,
     STATIC_GENERATOR = 1,
-	};
+};
 
 #endif // MAIN_HPP
