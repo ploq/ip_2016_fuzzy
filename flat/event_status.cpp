@@ -27,7 +27,7 @@ namespace Foo {
 		void Regenerate() {
 		    //Do we want to randomize new clients each cycle?
 		    //randomGenerator->generateClients(clients, 1024);
-		    event.Event_number = randomGenerator->generate();
+		    event.Event_number = randomGenerator->generate(1, 999);
 		    event.Stranded = randomGenerator->generate(0, 1);
 		}
 
@@ -35,7 +35,7 @@ namespace Foo {
 		void Regenerate(const std::map<std::string, std::vector<std::vector<int>>> &vars) {
 		    //Do we want to randomize new clients each cycle?
 		    //randomGenerator->generateClients(clients, 1024);
-		    event.Event_number = randomGenerator->generate(vars);
+		    event.Event_number = randomGenerator->generate(vars, 1, 999);
 		    event.Stranded = randomGenerator->generate(vars, 0, 1);
 		}
 
