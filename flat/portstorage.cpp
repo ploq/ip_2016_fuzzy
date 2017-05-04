@@ -4,11 +4,14 @@
 #include <vector>
 #include <map>
 #include <iostream>
+#include <string>
 
-static std::vector<I_Regeneratable*> regeneratables;
-static std::vector<std::string> names;
+using namespace std;
 
-void PortStorage::AddRegeneratable(I_Regeneratable* regen, std::string name)
+static vector<I_Regeneratable*> regeneratables;
+static vector<string> names;
+
+void PortStorage::AddRegeneratable(I_Regeneratable* regen, string name)
 {
     regeneratables.push_back(regen);
     
@@ -26,7 +29,7 @@ void PortStorage::Regenerate()
 }
 
 //Static values
-void PortStorage::Regenerate(const std::map<std::string, std::map<std::string, std::vector<std::vector<int>>>> &namespaces, const int64_t &curr_cycles)
+void PortStorage::Regenerate(const map<string, map<string, vector<vector<int>>>> &namespaces, const int64_t &curr_cycles)
 {
     for (unsigned int i = 0; i < regeneratables.size(); ++i)
     {

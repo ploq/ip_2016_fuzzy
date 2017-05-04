@@ -105,3 +105,14 @@ void MT1337::nextSeed()
 {
     twistIt();
 }
+
+void MT1337::generateClients(vector<string> &clients, const int &max)
+{
+    if (clients.size() == 0) {
+	int CLIENTS_MAX = generateRangeValue(0, max);
+	for (int i = 0 ; i < CLIENTS_MAX ; i++) {
+	    //TODO: randomize client names too?
+	    clients.push_back("client");
+	}
+    }
+}

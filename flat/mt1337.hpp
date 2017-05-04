@@ -3,6 +3,8 @@
 
 #include "randomgenerator.hpp"
 
+using namespace std;
+
 class MT1337 : public RandomGenerator {
     long long mt[624];
     int index;
@@ -14,10 +16,11 @@ public:
     MT1337(const unsigned int seed);
     long long generate();
     long long generate(long long min, long long max);
-    long long generate(const std::map<std::string, std::vector<std::vector<int>>> &vars, std::string name, const int64_t &curr_cycles);
-    long long generate(const std::map<std::string, std::vector<std::vector<int>>> &vars, std::string name, long long min, long long max, const int64_t &curr_cycles);
+    long long generate(const map<string, vector<vector<int>>> &vars, string name, const int64_t &curr_cycles);
+    long long generate(const map<string, vector<vector<int>>> &vars, string name, long long min, long long max, const int64_t &curr_cycles);
     uint64_t getSeed();
     void nextSeed();
+    void generateClients(vector<string> &clients, const int &max);
 };
 
 #endif

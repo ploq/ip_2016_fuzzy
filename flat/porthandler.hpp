@@ -32,7 +32,7 @@ public:
 	    }
 	}
 
-    void RegeneratePorts(std::map<std::string, std::vector<int>> vars)
+    void RegeneratePorts(const std::map<std::string, std::vector<int>> &vars)
 	{
 	    for (typename std::map<Key, Value*>::iterator it = m_ports.begin(); it != m_ports.end(); ++it)
 	    {
