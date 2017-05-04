@@ -1,5 +1,5 @@
 #ifndef FOO_EVENT_STATUS_PROVIDER_I_EVENT_STATUS_HPP 
-#define FOO_EVENT_STATUS_PROVIDER_I_EVENT_STATUS_HPP 
+#define FOO_EVENT_STATUS_PROVIDER_I_EVENT_STATUS_HPP
 
 #include <string>
 
@@ -14,7 +14,7 @@ namespace Foo {
 		virtual unsigned Get_Client_Id(std::string client_name) const =0; //always coherent!
 		virtual const std::string Get_Client_Name(const unsigned client_id) const=0; //always coherent!
 		virtual unsigned Get_Number_Of_Clients() const =0; //always coherent!
-		//virtual void Event_Event(const unsigned client_id, int event_id, const int curr_cycles) = 0; //clients are coherent!
+		virtual void Event_Event(const unsigned event_id, const bool stranded) = 0; //clients are coherent!
 		virtual unsigned Get_Event__Bandwidth(const unsigned int client_id) const=0;
 	    private:
 		I_Event_Status(const I_Event_Status&);
