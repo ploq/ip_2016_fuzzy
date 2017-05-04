@@ -25,12 +25,18 @@ namespace Foo {
                 }
 
 		void Regenerate() {
-		    randomGenerator->generate();
+		    //Do we want to randomize new clients each cycle?
+		    //randomGenerator->generateClients(clients, 1024);
+		    event.Event_number = randomGenerator->generate();
+		    event.Stranded = randomGenerator->generate(0, 1);
 		}
 
 		//Must be implemented
-		void Regenerate(const std::map<std::string, std::vector<std::vector<int>>> &vars, const int &curr_cycles) {
-		    randomGenerator->generate(vars, 0, 100);
+		void Regenerate(const std::map<std::string, std::vector<std::vector<int>>> &vars) {
+		    //Do we want to randomize new clients each cycle?
+		    //randomGenerator->generateClients(clients, 1024);
+		    event.Event_number = randomGenerator->generate(vars);
+		    event.Stranded = randomGenerator->generate(vars, 0, 1);
 		}
 
 		bool Is_Client_Connected(std::string client_name) const {
