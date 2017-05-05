@@ -43,8 +43,13 @@ namespace Foo {
 		}
 
 		bool Is_Client_Connected(std::string client_name) const {
-		    return randomGenerator->generate(0, 1);
-		} //random
+		    for (auto n : clients) {
+			if (n == client_name) {
+			    return true;
+			} 
+		    }
+		    return false;
+		}
 
 		unsigned Get_Client_Id(std::string client_name) const {
 		    unsigned ret = 0;
@@ -80,8 +85,16 @@ namespace Foo {
 		    return 1;
 		} //hardcoded
 
-		std::string getNamespace() {
+		const std::string getNamespace() {
                     return "Foo::Event_Status::Provider";
+                }
+
+		const std::string getName() {
+                    return name;
+                }
+
+		std::vector<std::string> &getClients() {
+                    return clients;
                 }
 	    };
 	    I_Event_Status::I_Event_Status() {
@@ -98,14 +111,14 @@ namespace Foo {
                     port = p;
                 }
                 Foo::Event_Status::Provider::I_Event_Status_Impl & Get_Port() {
-                    return *port;
+                    return *static_cast<I_Event_Status_Impl*>(port);
                 }
 
 		void Connect_Port(Foo::Event_Status::Provider::I_Event_Status& Other_End) {
-		    //I_Event_Status must be casted to _Impl, else the functions needed cannot be accessed. Add polymorphism in base class to allow casting?
-		    //if (!Get_Port()->Is_Client_Connected("")) {
-		    //Get_Port()->clients.push_back(Other_End);
-			//}
+		    std::string Other_End_Name = (*static_cast<I_Event_Status_Impl*>(&Other_End)).getName();
+		    if (!Get_Port().Is_Client_Connected(Other_End_Name)) {
+			Get_Port().getClients().push_back(Other_End_Name);
+		    }
 		}
             };
             I_Event_Status_Provider::I_Event_Status_Provider() {
