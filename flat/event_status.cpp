@@ -16,10 +16,13 @@ namespace Foo {
 		std::vector<std::string> clients;
 		RandomGenerator* randomGenerator;
 		Event event;
+		std::string name;
 	    public:
-		I_Event_Status_Impl() {
+		//std::string name;
+		I_Event_Status_Impl(std::string n) {
                     randomGenerator = &TestingEnvironment::createRandomGenerator();
 		    randomGenerator->generateClients(clients, 1024);
+		    name = n;
                 }
 		~I_Event_Status_Impl() {
                 }
@@ -27,16 +30,16 @@ namespace Foo {
 		void Regenerate() {
 		    //Do we want to randomize new clients each cycle?
 		    //randomGenerator->generateClients(clients, 1024);
-		    event.Event_number = randomGenerator->generate(1, 999);
-		    event.Stranded = randomGenerator->generate(0, 1);
+		    Event_Event(randomGenerator->generate(1, 999),
+				randomGenerator->generate(0, 1));
 		}
 
 		//Must be implemented
-		void Regenerate(const std::map<std::string, std::vector<std::vector<int>>> &vars) {
+		void Regenerate(const std::map<std::string, std::vector<std::vector<int>>> &vars, const int64_t &curr_cycles) {
 		    //Do we want to randomize new clients each cycle?
 		    //randomGenerator->generateClients(clients, 1024);
-		    event.Event_number = randomGenerator->generate(vars, 1, 999);
-		    event.Stranded = randomGenerator->generate(vars, 0, 1);
+		    Event_Event(randomGenerator->generate(vars, "event.Event_number", 1, 999, curr_cycles), 
+				randomGenerator->generate(vars, "event.Stranded", 0, 1, curr_cycles));
 		}
 
 		bool Is_Client_Connected(std::string client_name) const {
@@ -94,9 +97,16 @@ namespace Foo {
 		I_Event_Status_Provider_Impl(I_Event_Status* p) {
                     port = p;
                 }
-                Foo::Event_Status::Provider::I_Event_Status & Get_Port() {
+                Foo::Event_Status::Provider::I_Event_Status_Impl & Get_Port() {
                     return *port;
                 }
+
+		void Connect_Port(Foo::Event_Status::Provider::I_Event_Status& Other_End) {
+		    //I_Event_Status must be casted to _Impl, else the functions needed cannot be accessed. Add polymorphism in base class to allow casting?
+		    //if (!Get_Port()->Is_Client_Connected("")) {
+		    //Get_Port()->clients.push_back(Other_End);
+			//}
+		}
             };
             I_Event_Status_Provider::I_Event_Status_Provider() {
             }

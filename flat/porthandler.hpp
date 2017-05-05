@@ -25,7 +25,7 @@ public:
 	    }
 	    else
 	    {
-		Value* val = new Value();
+		Value* val = new Value(name);
 		m_ports[key] = val;
 		PortStorage::AddRegeneratable(new Regeneratable_Impl<Value*>(val), name);
 		return (void*)m_ports[key];
@@ -43,6 +43,8 @@ private:
     std::map<Key, Value*> m_ports;
 };
 
+
+//GetPort<PortType, KeyType>(key, name)
 template<typename Value, typename Key>
 Value* GetPort(Key key, std::string name)
 {
