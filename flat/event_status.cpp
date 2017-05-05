@@ -114,7 +114,6 @@ namespace Foo {
                     return *static_cast<I_Event_Status_Impl*>(port);
                 }
 
-
 		void Connect_Port(Foo::Event_Status::Provider::I_Event_Status& Other_End) {
 		    std::string Other_End_Name = (*static_cast<I_Event_Status_Impl*>(&Other_End)).getName();
 		    if (!Get_Port().Is_Client_Connected(Other_End_Name)) {
