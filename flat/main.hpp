@@ -5,7 +5,7 @@
 #define main_hpp
 #include "testingenvironment.hpp"
 #include "portenvironment.hpp"
-#include "app_main_event.hpp"
+#include "app_main_monitored.hpp"
 enum {
     RANDOM_GENERATOR,
     STATIC_GENERATOR,
