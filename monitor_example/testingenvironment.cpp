@@ -88,7 +88,7 @@ void TestingEnvironment::quit()
 
 void TestingEnvironment::readConfig() {
     ifstream config;
-    config.open("config.txt");
+    config.open("flat/config.txt");
 
     if (!config.is_open() || config.fail()) {
 	return;
@@ -112,10 +112,7 @@ void TestingEnvironment::readConfig() {
 	ss >> max_cycles;
 	ss >> val;
 
-	vector<int> vec;
-	vec.push_back(min_cycles);
-	vec.push_back(max_cycles);
-	vec.push_back(val);
+	vector<int> vec = {min_cycles, max_cycles, val};
 	TestingEnvironment::namespaces[ns][var].push_back(vec);
     }
     /*
