@@ -1,7 +1,0 @@
-1: Kommer provider("x") och requirer("x") att peka till samma resurs? (nej)
-2: Seeds per provider/requirer eller per port? (whatever)
-4: Var ska vi hantera slumpgenerering? I portarna eller i requirer/provided eller i AFLlib (whatever)
-5: Randongenerera enums? (största + lägsta)
-6: APP_Initialize V2 3 or 5? default/startup? skillnad? När sätter vi startup/default värden? (ignorera startup, kör på default)
-7: const/referencer/och dylikt, vad e syftet? (const& + byvalue ska slumpgenereras, & går ut)
-8: Exakt vilka typer av värden kommer slumpgenereras (siffror eller annat? enums, strängar, mm)? (siffror)

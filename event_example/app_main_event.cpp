@@ -9,27 +9,32 @@ namespace {
 
 // For simplicities global variables are used.
 // But normally they are encapsulated in a top component/class.
-Foo::Event_Status::Provider::I_Event_Status_Provider* comp_z;
+    Foo::Event_Status::Provider::I_Event_Status_Provider* comp_x;
+    Foo::Event_Status::Provider::I_Event_Status_Provider* comp_y;
 
-Foo::Event_Status::Provider::I_Event_Status* port_z;
+    Foo::Event_Status::Provider::I_Event_Status* port_x;
+    Foo::Event_Status::Provider::I_Event_Status* port_y;
 
 
 
 } // NS:
 
 void APP_Name_Initialize() {
-    comp_z = &Foo::Event_Status::Provider::Create_Instance("Z");
+    comp_x = &Foo::Event_Status::Provider::Create_Instance("X");
+    comp_y = &Foo::Event_Status::Provider::Create_Instance("Y");
     //comp_z->Init();
-    port_z = &comp_z->Get_Port();
+    port_x = &comp_x->Get_Port();
+    port_y = &comp_y->Get_Port();
 }
 
 void APP_Name_Execute() {
 
-    //port_z->Get_Fun().V1 = comp_x->Get_Port().Get_Fun_V1();
+    comp_x->Connect_Port(*port_y);
 }
 
 void APP_Name_Terminate() {
-    delete comp_z;
+    delete comp_x;
+    delete comp_y;
 
-    // note that port_z is NOT deleted.
+    // note that port_y/x is NOT deleted.
 }

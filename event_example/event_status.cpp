@@ -15,40 +15,43 @@ namespace Foo {
 	    private:
 		std::vector<std::string> clients;
 		RandomGenerator* randomGenerator;
+		I_Event_Status* Other_End;
 		Event event;
 		std::string name;
 	    public:
-		//std::string name;
 		I_Event_Status_Impl(std::string n) {
                     randomGenerator = &TestingEnvironment::createRandomGenerator();
-		    randomGenerator->generateClients(clients, 1024);
+		    randomGenerator->generateClients(clients, 1024); //Magic number
 		    name = n;
+		    Other_End = 0;
                 }
 		~I_Event_Status_Impl() {
                 }
 
 		void Regenerate() {
-		    //Do we want to randomize new clients each cycle?
-		    //randomGenerator->generateClients(clients, 1024);
-		    Event_Event(randomGenerator->generate(1, 999),
-				randomGenerator->generate(0, 1));
+		    if (Other_End) {
+			Get_Other_End().Event_Event(randomGenerator->generate(1, 999),
+					       randomGenerator->generate(0, 1));
+		    }
 		}
 
 		//Must be implemented
 		void Regenerate(const std::map<std::string, std::vector<std::vector<int>>> &vars, const int64_t &curr_cycles) {
-		    //Do we want to randomize new clients each cycle?
-		    //randomGenerator->generateClients(clients, 1024);
-		    Event_Event(randomGenerator->generate(vars, "event.Event_number", 1, 999, curr_cycles), 
-				randomGenerator->generate(vars, "event.Stranded", 0, 1, curr_cycles));
+		    if (Other_End) {
+			Get_Other_End().Event_Event(randomGenerator->generate(vars, "event.Event_number", 1, 999, curr_cycles), 
+					       randomGenerator->generate(vars, "event.Stranded", 0, 1, curr_cycles));
+		    }
 		}
 
 		bool Is_Client_Connected(std::string client_name) const {
-		    for (auto n : clients) {
+		    /*for (auto n : clients) {
 			if (n == client_name) {
 			    return true;
 			} 
-		    }
+			}
 		    return false;
+		    */
+		    return randomGenerator->generate(0,1);
 		}
 
 		unsigned Get_Client_Id(std::string client_name) const {
@@ -83,7 +86,7 @@ namespace Foo {
 
 		unsigned Get_Event__Bandwidth(const unsigned int client_id) const {
 		    return 1;
-		} //hardcoded
+		} //hardcoded for now
 
 		const std::string getNamespace() {
                     return "Foo::Event_Status::Provider";
@@ -95,6 +98,15 @@ namespace Foo {
 
 		std::vector<std::string> &getClients() {
                     return clients;
+                }
+
+		void Set_Other_End(I_Event_Status* other_e) {
+                    Other_End = static_cast<I_Event_Status_Impl*>(other_e);
+                }
+
+		I_Event_Status & Get_Other_End() {
+		    return *Other_End;
+		    
                 }
 	    };
 	    I_Event_Status::I_Event_Status() {
@@ -110,14 +122,20 @@ namespace Foo {
 		I_Event_Status_Provider_Impl(I_Event_Status* p) {
                     port = p;
                 }
-                Foo::Event_Status::Provider::I_Event_Status_Impl & Get_Port() {
-                    return *static_cast<I_Event_Status_Impl*>(port);
+
+		//Must be implemented
+		Foo::Event_Status::Provider::I_Event_Status & Get_Port() {
+		    return *port;
+                }
+
+		//Needs to also generate this function, when generating Get_Port()
+		Foo::Event_Status::Provider::I_Event_Status_Impl & Get_Port_Impl() {
+		    return *static_cast<I_Event_Status_Impl*>(port);
                 }
 
 		void Connect_Port(Foo::Event_Status::Provider::I_Event_Status& Other_End) {
-		    std::string Other_End_Name = (*static_cast<I_Event_Status_Impl*>(&Other_End)).getName();
-		    if (!Get_Port().Is_Client_Connected(Other_End_Name)) {
-			Get_Port().getClients().push_back(Other_End_Name);
+		    if (Other_End.Is_Client_Connected(Get_Port_Impl().getName())) {
+			Get_Port_Impl().Set_Other_End(&Other_End);
 		    }
 		}
             };
