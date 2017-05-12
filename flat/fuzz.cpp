@@ -29,6 +29,9 @@ namespace Foo {
                     fun.V4.P0 = randomGenerator->generate(10, 2000);
                     fun.V5 = static_cast<Foo::SimpleT::Enum>(randomGenerator->generate(0, 2));
                     fun.V6 = static_cast<Foo::WithHolesT::Enum>(randomGenerator->generate(1, 10));
+		    for (auto &i : fun.V7) {
+			i = randomGenerator->generate(0, 100);
+		    }
                     fum.V0 = randomGenerator->generate(-9223372036854775807, 9223372036854775807);
                 }
                 void Regenerate(const std::map<std::string, std::vector<std::vector<int> > > &vars, const int64_t & curr_cycles) {
@@ -40,6 +43,9 @@ namespace Foo {
                     fun.V4.P0 = randomGenerator->generate(vars, "fun.V4.P0", 10, 2000, curr_cycles);
                     fun.V5 = static_cast<Foo::SimpleT::Enum>(randomGenerator->generate(vars, "fun.V5", 0, 2, curr_cycles));
                     fun.V6 = static_cast<Foo::WithHolesT::Enum>(randomGenerator->generate(vars, "fun.V6", 1, 10, curr_cycles));
+		    for (auto &i : fun.V7) {
+			i = randomGenerator->generate(vars, "fun.V7", 0, 100, curr_cycles);
+		    }
                     fum.V0 = randomGenerator->generate(vars, "fum.V0", -9223372036854775807, 9223372036854775807, curr_cycles);
                 }
                 std::string getNamespace() {
