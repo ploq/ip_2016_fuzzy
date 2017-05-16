@@ -5,25 +5,26 @@
 
 int main(int argc, char** argv) {
     TestingEnvironment::readConfig();
-    while (__AFL_LOOP(1000)) {
-        if (!TestingEnvironment::init()) {
-            continue;
-        }
-        APP_Name_Initialize();
-        for (int n = 0; n < TestingEnvironment::getCycles(); n++) {
-            switch (TestingEnvironment::getRandType()) {
-                case RANDOM_GENERATOR:
-                    PortStorage::Regenerate();
-                    break;
-                case STATIC_GENERATOR:
-                    PortStorage::Regenerate(TestingEnvironment::getConfig(), n);
-                    break;
-                default:
-                    break;
-            }
-            APP_Name_Execute();
-        }
-        PortStorage::CleanUp();
+    //while (__AFL_LOOP(1000)) {
+    if (!TestingEnvironment::init()) {
+	//continue;
+	return 0;
     }
+    APP_Name_Initialize();
+    for (int n = 0; n < TestingEnvironment::getCycles(); n++) {
+	switch (TestingEnvironment::getRandType()) {
+	case RANDOM_GENERATOR:
+	    PortStorage::Regenerate();
+	    break;
+	case STATIC_GENERATOR:
+	    PortStorage::Regenerate(TestingEnvironment::getConfig(), n);
+	    break;
+	default:
+	    break;
+	}
+	APP_Name_Execute();
+    }
+    PortStorage::CleanUp();
+    //}
     return 0;
 }

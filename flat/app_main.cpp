@@ -43,11 +43,12 @@ void APP_Name_Execute() {
 	    comp_y->Get_Port().Put_Fum(uni(rng));
 	}
     }
-
+    
     //ERRORS
-    if (comp_x->Get_Port().Get_Fun_V0() / comp_y->Get_Port().Get_Fum().V0 > 2) {
+    /*if (comp_x->Get_Port().Get_Fun_V0() / comp_y->Get_Port().Get_Fum().V0 > 2) {
         comp_y->Get_Port().Get_Fum().V0 = 42;
     }
+    */
     //------
 
     port_z->Get_Fun().V1 = comp_x->Get_Port().Get_Fun_V1();

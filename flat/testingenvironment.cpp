@@ -88,7 +88,7 @@ void TestingEnvironment::quit()
 
 void TestingEnvironment::readConfig() {
     ifstream config;
-    config.open("config.txt");
+    config.open("../config.txt");
 
     if (!config.is_open() || config.fail()) {
 	return;
