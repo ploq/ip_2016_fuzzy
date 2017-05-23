@@ -43,16 +43,16 @@ bool TestingEnvironment::init() {
        The amount is specified by the first byte of the cycles range.
        The first byte of cycles range is found in afl_data[2].
      */
+    if (afl_data[0] < 3)
+	return false;
     unsigned char CYCLES_MAX_BYTES = afl_data[2];
     unsigned int cycles;
 
-    if (CYCLES_MAX_BYTES > 50)
-	return false;
-
     int offset = 3;
+    if (CYCLES_MAX_BYTES > 50 || CYCLES_MAX_BYTES+offset > afl_data[0])
+	return false;
     for (int i = 0; i < CYCLES_MAX_BYTES ; i++) {
-        cycles += afl_data[offset + i];
-      
+        cycles += afl_data[offset + i]; //CRASH
     }
 
     TestingEnvironment::params.cycles = cycles;
@@ -61,13 +61,14 @@ bool TestingEnvironment::init() {
        The amount is specified by the first byte of the seed range.
        The first byte of seed range is found in afl_data[3 + CYCLES_MAX_BYTES].
      */
-    unsigned char SEED_MAX_BYTES = afl_data[3+CYCLES_MAX_BYTES];
+    unsigned char SEED_MAX_BYTES = afl_data[3+CYCLES_MAX_BYTES]; //63
     unsigned int seed;
 
     offset = 3 + CYCLES_MAX_BYTES + 1;
-    if (SEED_MAX_BYTES > 50)
+    if (SEED_MAX_BYTES > 50 || SEED_MAX_BYTES+offset >= afl_data[0])
 	return false;
     for (int i = 0; i < SEED_MAX_BYTES ; i++) {
+       
         seed += afl_data[offset + i];
     }
 
